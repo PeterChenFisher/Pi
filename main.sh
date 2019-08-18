@@ -1,2 +1,2 @@
-source venv/bin/activate
-python3 main.py
+source /home/pi/Projects/Pi/venv/bin/activate
+python main.py
