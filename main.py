@@ -23,7 +23,7 @@ logger.info('Position 3')
 BlockScheduler.add_job(func=music_play.random_play, args=('musics',), trigger='cron', max_instances=10, month='*',
                        day='*', hour='6', minute='45')
 logger.info('Position 4')
-BlockScheduler.add_job(func=test_log, trigger='cron', max_instances=10, second='*/5')
+# BlockScheduler.add_job(func=test_log, trigger='cron', max_instances=10, second='*/5')
 logger.info('Position 5')
 BackScheduler.start()
 logger.info('Position 6')
