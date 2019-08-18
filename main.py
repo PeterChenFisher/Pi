@@ -3,6 +3,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
 from Tools import music_play, log
 from config import *
+from test import test_log
 
 logger = log.logger
 
@@ -18,5 +19,6 @@ if __name__ == '__main__':
     logger.info('PiProjects Scheduler StartUp!')
     BlockScheduler.add_job(func=music_play.random_play, args=('musics',), trigger='cron', max_instances=10, month='*',
                            day='*', hour='6', minute='45')
+    BlockScheduler.add_job(func=test_log, args=('musics',), trigger='cron', max_instances=10, second='*/5')
     BackScheduler.start()
     BlockScheduler.start()
