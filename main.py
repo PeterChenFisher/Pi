@@ -9,6 +9,7 @@ logger = log.logger
 
 if __name__ == '__main__':
     logger.info('PiProjects Initiating...')
+    logger.info('Position 0 ')
     BlockScheduler = BlockingScheduler()
     BackScheduler = BackgroundScheduler()
     logger.info('Position 1')
