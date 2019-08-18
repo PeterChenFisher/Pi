@@ -12,6 +12,7 @@ def random_play(musics_location=None):
     if not musics_location:
         musics_location = '../musics'
     musics = os.listdir(musics_location)
+    logger.info('Musics:%s' % str(musics))
     music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))]
     music_count = len(music_locations)
     ran_music = music_locations[random.randint(0, music_count - 1)]

@@ -13,6 +13,7 @@ if __name__ == '__main__':
     BackScheduler._logger = logger
     BlockScheduler._logger = logger
     time.sleep(100)
+    logger.info('Sleep Finished.')
     music_play.random_play('musics')
     logger.info('PiProjects Scheduler StartUp!')
     BlockScheduler.add_job(func=music_play.random_play, args=('musics',), trigger='cron', max_instances=10, month='*',
