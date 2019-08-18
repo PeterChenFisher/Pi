@@ -3,7 +3,11 @@ certifi==2019.6.16
 chardet==3.0.4
 idna==2.8
 pygame==1.9.6
+pypiwin32==223
+pyttsx==1.1
+pyttsx3==2.71
 pytz==2019.2
+pywin32==224
 requests==2.22.0
 six==1.12.0
 tzlocal==2.0.0
