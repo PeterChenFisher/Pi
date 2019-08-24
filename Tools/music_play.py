@@ -5,6 +5,7 @@ import pygame
 import os
 # import cv2
 import threading
+from mutagen.mp3 import MP3
 
 if __name__ == '__main__':
     from log import logger
@@ -59,6 +60,10 @@ def play_a_song_via_commandline(music):
     commandline = 'mplayer ' + music
     logger.info('The CommandLine is: ' + commandline)
     result = os.system(commandline)
+    audio = MP3(music)
+    mp3len = audio.info.length
+    time.sleep(mp3len)
+
     if result == 0:
         logger.info('Music Successfuly Played.')
         return True
