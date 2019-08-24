@@ -12,3 +12,7 @@ def scrab_weather_info():
 
 def transfer_text2voice():
     return
+
+
+def oclock_perday():
+    return
