@@ -22,7 +22,8 @@ def get_weather():
         request_time += 1
         if request_time == 10:
             return template(message='Requested Over 10 Times.')
-        logger.info(f'Request UrlPage Failed. We will Request Again. Request Time:{request_time}. Error Message:{e}')
+        logger.info(
+            'Request UrlPage Failed. We will Request Again. Request Time:%s. Error Message:%s' % (request_time, e))
         result = get_weather()
         return result
     soup = BeautifulSoup(response.content, 'html.parser')
@@ -33,7 +34,7 @@ def get_weather():
         # weather_info = soup.body.find('div', class_='wrap clearfix wea_info').find('div', class_='left')
     except Exception as e:
         logger.info('Get Weather Info Failed.Please Check The Url Page Style.', e)
-        return template(message=f'Get Weather Info Failed.Please Check The Url Page Style. Error Message:{e}')
+        return template(message='Get Weather Info Failed.Please Check The Url Page Style. Error Message:' + str(e))
     # print(weather_info)
     # if not wea_alert(weather_info) or not wea_content(weather_info) or not wea_about(weather_info) or not wea_tips(
     #         weather_info):
