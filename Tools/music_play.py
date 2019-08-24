@@ -3,7 +3,7 @@ import sys
 import random
 import pygame
 import os
-from Tools.log import logger
+from .log import logger
 import cv2
 import threading
 
