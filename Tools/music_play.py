@@ -5,13 +5,17 @@ import pygame
 import os
 # import cv2
 import threading
-from .log import logger
+
+if __name__ == '__main__':
+    from log import logger
+elif __name__ != '__main__':
+    from .log import logger
 
 pygame.mixer.init()
 pygame.init()
 
 
-def random_play(musics_location=None, mode='pygame'):
+def random_play(musics_location=None, mode='commandline', times=1):
     if not musics_location:
         os_platform = sys.platform
         if os_platform == 'Linux':
@@ -21,19 +25,19 @@ def random_play(musics_location=None, mode='pygame'):
         else:
             logger.warning('Judge System Failed.Exit.')
             return
-    print(musics_location)
     musics = os.listdir(musics_location)
     logger.info('Musics:%s' % str(musics))
     music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))]
     ran_music = music_locations[random.randint(0, len(music_locations) - 1)]
     logger.info('Music To Be Played: ' + ran_music)
     if mode == 'pygame':
-        if not play_a_song(ran_music):
-            random_play(musics_location, mode=mode)
-        return
+        for i in range(0, times):
+            if not play_a_song(ran_music):
+                random_play(musics_location, mode=mode)
     elif mode == 'commandline':
-        if not play_a_song_via_commandline(ran_music):
-            random_play(musics_location, mode=mode)
+        for i in range(0, times):
+            if not play_a_song_via_commandline(ran_music):
+                random_play(musics_location, mode=mode)
 
 
 def play_a_song(music):
@@ -66,4 +70,5 @@ def waitKey():
 
 
 if __name__ == '__main__':
-    random_play(mode='commandline')
+    random_play(times=10)
+    # random_play(mode='commandline')
