@@ -5,11 +5,7 @@ import pygame
 import os
 # import cv2
 import threading
-
-if __name__ == '__main__':
-    from log import logger
-else:
-    from .log import logger
+from .log import logger
 
 pygame.mixer.init()
 pygame.init()
