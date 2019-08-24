@@ -32,6 +32,7 @@ def random_play(musics_location=None, mode='commandline', times=1):
     logger.info('Music To Be Played: ' + ran_music)
     if mode == 'pygame':
         for i in range(0, times):
+            time.sleep(0.5)
             if not play_a_song(ran_music):
                 random_play(musics_location, mode=mode)
     elif mode == 'commandline':
@@ -57,8 +58,13 @@ def play_a_song(music):
 def play_a_song_via_commandline(music):
     commandline = 'mplayer ' + music
     logger.info('The CommandLine is: ' + commandline)
-    os.system(commandline)
-    return True
+    result = os.system(commandline)
+    if result == 0:
+        logger.info('Music Successfuly Played.')
+        return True
+    else:
+        logger.warning('Music Playing Failed.')
+        return False
 
 
 def waitKey():
