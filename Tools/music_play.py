@@ -51,8 +51,8 @@ def play_a_song(music):
 
 
 def play_a_song_via_commandline(music):
-    commandline = f'mplayer {music}'
-    logger.info(f'The CommandLine is: {commandline}')
+    commandline = 'mplayer ' + music
+    logger.info('The CommandLine is: ' + commandline)
     os.system(commandline)
     return True
 
