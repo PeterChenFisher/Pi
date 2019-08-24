@@ -4,7 +4,7 @@ import sys
 
 
 def test():
-    # music_play.reform_music_file_names(musics_location='musics')
+    music_play.reform_music_file_names(musics_location='musics')
     music_play.random_play(musics_location='musics')
     return
 
