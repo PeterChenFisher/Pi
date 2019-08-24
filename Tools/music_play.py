@@ -3,9 +3,13 @@ import sys
 import random
 import pygame
 import os
-from .log import logger
 import cv2
 import threading
+
+if __name__ == '__main__':
+    from log import logger
+else:
+    from .log import logger
 
 pygame.mixer.init()
 pygame.init()
