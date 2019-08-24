@@ -2,6 +2,7 @@ import os
 
 excluded_file = 'excluded'
 log_path = os.path.join(excluded_file, 'log')
+tts_location = os.path.join(excluded_file, 'tts')
 
 
 def mk_dirs(dirs):
@@ -13,4 +14,4 @@ def mk_dirs(dirs):
             continue
 
 
-mk_dirs([excluded_file])
+mk_dirs([excluded_file, tts_location])
