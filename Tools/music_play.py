@@ -18,7 +18,7 @@ def random_play(musics_location=None):
     music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))]
     ran_music = music_locations[random.randint(0, len(music_locations) - 1)]
     logger.info('Music To Be Played: ' + ran_music)
-    if not play_a_song(ran_music):
+    if not play_a_song_via_commandline(ran_music):
         random_play(musics_location)
 
 
