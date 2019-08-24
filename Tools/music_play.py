@@ -75,6 +75,14 @@ def waitKey():
     return
 
 
+def reform_music_file_names(musics_location='.\musics'):
+    musics = os.listdir(musics_location)
+    music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))]
+    for location in music_locations:
+        os.rename(location, location.replace(' ', ''))
+    return
+
+
 if __name__ == '__main__':
     random_play(times=10)
     # random_play(mode='commandline')
