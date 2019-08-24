@@ -3,7 +3,7 @@ import sys
 import random
 import pygame
 import os
-import cv2
+# import cv2
 import threading
 
 if __name__ == '__main__':
@@ -46,8 +46,8 @@ def play_a_song(music):
         pygame.mixer.music.play()
         while (pygame.mixer.music.get_busy()):
             time.sleep(1)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+            # if cv2.waitKey(1) & 0xFF == ord('q'):
+            #     break
         return True
     except Exception as e:
         logger.warning('Play Music Failed.Let us Do it Again. Msg:%s' % e)
