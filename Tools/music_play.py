@@ -4,6 +4,7 @@ import pygame
 import os
 from Tools.log import logger
 import cv2
+import threading
 
 pygame.mixer.init()
 pygame.init()
@@ -33,6 +34,19 @@ def play_a_song(music):
     except Exception as e:
         logger.warning('Play Music Failed.Let us Do it Again. Msg:%s' % e)
         return False
+
+
+def play_a_song_via_commandline(music):
+    os.system(f'mplayer {music}')
+    return
+
+
+def waitKey():
+    def wait_key():
+        return
+
+    threading.Thread(target=wait_key)
+    return
 
 
 if __name__ == '__main__':
