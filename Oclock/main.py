@@ -2,7 +2,7 @@ import pygame
 import requests
 
 
-def play_music__randomly():
+def play_music_randomly():
     return
 
 
