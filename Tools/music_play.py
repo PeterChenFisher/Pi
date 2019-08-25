@@ -25,21 +25,23 @@ def random_play(musics_location=None, mode='commandline', times=1):
             musics_location = '..\musics'
         else:
             logger.warning('Judge System Failed.Exit.')
-            return
+            return 'System error'
     musics = os.listdir(musics_location)
     logger.info('Musics:%s' % str(musics))
     music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))]
-    ran_music = music_locations[random.randint(0, len(music_locations) - 1)]
-    logger.info('Music To Be Played: ' + ran_music)
     if mode == 'pygame':
-        for i in range(0, times):
-            time.sleep(0.5)
-            if not play_a_song(ran_music):
-                random_play(musics_location, mode=mode)
+        player = play_a_song
     elif mode == 'commandline':
-        for i in range(0, times):
-            if not play_a_song_via_commandline(ran_music):
-                random_play(musics_location, mode=mode)
+        player = play_a_song_via_commandline
+    else:
+        return 'Play Mode Error.'
+    for i in range(0, times):
+        ran_music = music_locations[random.randint(0, len(music_locations) - 1)]
+        logger.info('Music To Be Played: ' + ran_music)
+        time.sleep(0.5)
+        player(ran_music)
+        # if not play_a_song(ran_music):
+        #     random_play(musics_location, mode=mode)
 
 
 def play_a_song(music):
