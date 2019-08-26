@@ -3,6 +3,5 @@ build/
 venv/
 .idea/
 excluded/
-musics/
 __pycache__/
 *.pyc
