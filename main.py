@@ -3,7 +3,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
 from Tools import music_play, log
 from config import *
-from test import test_log
 
 logger = log.logger
 
