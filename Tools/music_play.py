@@ -62,9 +62,7 @@ def play_a_song_via_commandline(music):
     commandline = 'mplayer ' + music
     logger.info('The CommandLine is: ' + commandline)
     result = os.system(commandline)
-    audio = MP3(music)
-    mp3len = audio.info.length
-    time.sleep(mp3len)
+    logger.info('After Playing Music.')
 
     if result == 0:
         logger.info('Music Successfuly Played.')
