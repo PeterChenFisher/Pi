@@ -5,7 +5,6 @@ import pygame
 import os
 # import cv2
 import threading
-from mutagen.mp3 import MP3
 
 if __name__ == '__main__':
     from log import logger
