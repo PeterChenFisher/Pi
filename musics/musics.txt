@@ -1,0 +1,4 @@
+# 网易云音乐直链编号
+http://music.163.com/song?id=28953484&userid=129882220
+http://music.163.com/song?id=3950792&userid=129882220
+http://music.163.com/song?id=30496792&userid=129882220
