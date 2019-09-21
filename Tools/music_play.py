@@ -25,11 +25,11 @@ def random_play(musics_location=None, mode='commandline', times=1):
         else:
             logger.warning('Judge System Failed.Exit.')
             return 'System error'
-    music_chains = read_song_list_via_linear_chain()
+    music_chains = read_song_list_via_linear_chain(os.path.join(musics_location, 'musics.txt'))
     musics = os.listdir(musics_location)
     logger.info('Musics:%s' % str(musics))
-    music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))].extend(
-        music_chains)
+    music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))]
+    music_locations.extend(music_chains)
     print(music_locations)
     if mode == 'pygame':
         player = play_a_song
