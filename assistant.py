@@ -17,7 +17,7 @@ if __name__ == '__main__':
         print(arg)
         print(type(arg))
         if arg == 'player':
-            music_play.random_play(musics_location='musics', mode='commandline', times=50)
+            music_play.random_play(musics_location='musics', mode='commandline', times=4)
         elif arg == 'weather':
             schedules.weather_reporter()
         elif arg == 'test':
