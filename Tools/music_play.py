@@ -33,7 +33,7 @@ def random_play(musics_location=None, mode='commandline', times=1):
     logger.info('Musics:%s' % str(music_locations))
 
     if mode == 'pygame':
-        player = play_a_song
+        player = play_a_song_via_pygame
     elif mode == 'commandline':
         player = play_a_song_via_commandline
     else:
@@ -41,7 +41,7 @@ def random_play(musics_location=None, mode='commandline', times=1):
     i = 0
     while i < times:
         ran_music = music_locations[random.randint(0, len(music_locations) - 1)]
-        logger.info('Music To Be Played: ' + ran_music)
+        # logger.info('Music To Be Played: ' + ran_music)
         time.sleep(0.5)
         player(ran_music)
         i += 1
@@ -79,7 +79,7 @@ def read_song_list_via_linear_chain(music_list_file_location=None):
     return music_id_list
 
 
-def play_a_song(music):
+def play_a_song_via_pygame(music):
     try:
         pygame.mixer.music.load(music)
         pygame.mixer.music.play()
@@ -97,13 +97,13 @@ def play_a_song_via_commandline(music):
     commandline = 'mplayer ' + music
     logger.info('The CommandLine is: ' + commandline)
     result = os.system(commandline)
-    logger.info('After Playing Music.')
+    # logger.info('After Playing Music.')
 
     if result == 0:
         logger.info('Music Successfuly Played.')
         return True
     else:
-        logger.warning('Music Playing Failed.')
+        logger.warning('Failed to play the music.')
         return False
 
 
