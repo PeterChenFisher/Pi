@@ -34,3 +34,5 @@ http://music.163.com/song?id=35470197&userid=129882220
 http://music.163.com/song?id=64293&userid=129882220
 # 陪你度过漫长岁月
 http://music.163.com/song?id=35403523&userid=129882220
+# 老男孩
+http://music.163.com/#/m/song?id=362998
