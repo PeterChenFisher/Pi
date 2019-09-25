@@ -29,10 +29,9 @@ def logger_generator(log_path, logger_name, when='midnight', logger=None):
     logger.addHandler(timedRotatingFileHandler)
     logger.addHandler(streamHandler)
 
-    # logger.info('\n  -Logger %s' % logger.name + 'starts workign.\n' +
-    #             '  Runtime: %s\n' % time.strftime('%Y-%m-%d %H:%M:%S'))
+    logger.info('\n  -Logger %s' % logger.name + 'starts working.\n')
 
     return logger
 
 
-logger = logger_generator(logger_name='PiProjects', log_path=config.log_path)
+logger = logger_generator(logger_name='PiProjects', log_path=config.log_path, when='W1')
