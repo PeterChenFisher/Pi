@@ -30,7 +30,9 @@ def random_play(musics_location=None, mode='commandline', times=1):
     music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))]
     music_chains = read_song_list_via_linear_chain(os.path.join(musics_location, 'musics.txt'))
     music_locations.extend(music_chains)
-    logger.info('Musics:%s' % str(music_locations))
+    logger.info('All Musics : %s')
+    for music_location in music_locations:
+        logger.info(str(music_location))
 
     if mode == 'pygame':
         player = play_a_song_via_pygame
