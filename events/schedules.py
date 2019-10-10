@@ -19,5 +19,10 @@ def alarm_oclock():
     return
 
 
+def tiktoktiktok():
+
+    return
+
+
 if __name__ == '__main__':
     weather_reporter()

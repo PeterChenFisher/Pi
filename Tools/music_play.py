@@ -45,39 +45,41 @@ def random_play(musics_location=None, mode='commandline', times=1):
         ran_music = music_locations[random.randint(0, len(music_locations) - 1)]
         # logger.info('Music To Be Played: ' + ran_music)
         time.sleep(0.5)
-        player(ran_music)
+        if not player(ran_music):
+            logger.warning('Music: ' + ran_music)
+            continue
         i += 1
 
 
 def read_song_list_via_linear_chain(music_list_file_location=None):
     music_id_list = []
-    net_easy_music_mother_linear_chain = 'https://music.163.com/song/media/outer/url?id='
+    net_ease_music_mother_linear_chain = 'https://music.163.com/song/media/outer/url?id='
 
     if music_list_file_location is None:
         os_platform = sys.platform
-        if os_platform == 'Linux':
+        if os_platform == 'Linux' or os_platform == 'linux':
             music_list_file_location = '../musics/musics.txt'
         elif os_platform == 'win32':
             music_list_file_location = '..\musics\musics.txt'
         else:
             logger.warning('Judge System Failed.Exit.')
             return 'System error'
+
     with open(music_list_file_location, 'r', encoding='utf-8') as music_list_file:
         lines = music_list_file.readlines()
         for line in lines:
-            if line.startswith('#') or line == '/n':
+            if line.startswith('#') or line == '\n' :
                 continue
             if line.startswith('http://music.163.com/'):
                 music_id = line.split('id=')[1].split('&')[0]
-                muisc_linear_chain = net_easy_music_mother_linear_chain + str(music_id) + '.mp3'
-            elif line.startswith('OriginlChain'):
-                muisc_linear_chain = line.split(':')[1]
+                music_linear_chain = net_ease_music_mother_linear_chain + str(music_id) + '.mp3'
+            elif line.startswith('OriginalChain'):
+                music_linear_chain = line.split(':')[1]
             else:
                 music_id = line
-                muisc_linear_chain = net_easy_music_mother_linear_chain + str(music_id) + '.mp3'
+                music_linear_chain = net_ease_music_mother_linear_chain + str(music_id) + '.mp3'
 
-            music_id_list.append(muisc_linear_chain)
-
+            music_id_list.append(music_linear_chain)
     return music_id_list
 
 
@@ -126,6 +128,6 @@ def reform_music_file_names(musics_location='.\musics'):
 
 
 if __name__ == '__main__':
-    random_play(times=10)
-    # read_song_list_via_linear_chain()
+    # random_play(times=10)
+    read_song_list_via_linear_chain()
     # random_play(mode='commandline')
