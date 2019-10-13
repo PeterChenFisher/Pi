@@ -10,14 +10,18 @@ music_list = []
 
 if __name__ == '__main__':
     from log import logger
+    from DDingWarn import request_ding
 elif __name__ != '__main__':
     from .log import logger
+    from .DDingWarn import request_ding
 
 pygame.mixer.init()
 pygame.init()
 
 
 def random_play(musics_location=None, mode='commandline', times=1):
+    global music_list
+
     if not musics_location:
         os_platform = sys.platform
         if os_platform == 'Linux':
@@ -28,7 +32,6 @@ def random_play(musics_location=None, mode='commandline', times=1):
             logger.warning('System Estimate Failed.Exit.')
             return 'System error'
 
-    global music_list
     if music_list == []:
 
         musics = os.listdir(musics_location)
@@ -64,7 +67,7 @@ def read_song_list_via_linear_chain(music_list_file_location=None):
     if music_list_file_location is None:
         os_platform = sys.platform
         if os_platform == 'Linux' or os_platform == 'linux':
-            music_list_file_location = '../musics/musics.txt'
+            music_list_file_location = '../musics/musics.txt' # TODO 换成绝对路径
         elif os_platform == 'win32':
             music_list_file_location = '..\musics\musics.txt'
         else:
@@ -99,7 +102,7 @@ def play_a_song_via_pygame(music):
             #     break
         return True
     except Exception as e:
-        logger.warning('Play Music Failed.Let us Do it Again. Msg:%s' % e)
+        request_ding(result=['Play Music Failed.Let us Do it Again. Msg:%s' % e])
         return False
 
 
@@ -113,12 +116,14 @@ def play_a_song_via_commandline(music):
         logger.info('Music Successfuly Played.')
         return True
     else:
-        logger.warning('Failed to play the music.')
+        request_ding(result=['Failed to play the music.The music is %s'%music])
         return False
 
 
 def waitKey():
     def wait_key():
+        import socket
+        so = socket.socket()
         return
     import socket
     so = socket.socket()
@@ -135,6 +140,6 @@ def reform_music_file_names(musics_location='.\musics'):
 
 
 if __name__ == '__main__':
-    # random_play(times=10)
-    read_song_list_via_linear_chain()
+    random_play(times=10)
+    # read_song_list_via_linear_chain()
     # random_play(mode='commandline')
