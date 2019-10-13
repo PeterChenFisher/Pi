@@ -1,7 +1,7 @@
 import config
 import time
 from urllib import request
-from log import logger
+from .log import logger
 import json
 
 
