@@ -6,6 +6,8 @@ import os
 # import cv2
 import threading
 
+music_list = []
+
 if __name__ == '__main__':
     from log import logger
 elif __name__ != '__main__':
@@ -26,13 +28,17 @@ def random_play(musics_location=None, mode='commandline', times=1):
             logger.warning('System Estimate Failed.Exit.')
             return 'System error'
 
-    musics = os.listdir(musics_location)
-    music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))]
-    music_chains = read_song_list_via_linear_chain(os.path.join(musics_location, 'musics.txt'))
-    music_locations.extend(music_chains)
-    logger.info('All Musics : %s')
-    for music_location in music_locations:
-        logger.info(str(music_location))
+    global music_list
+    if music_list == []:
+
+        musics = os.listdir(musics_location)
+        music_locations = [os.path.join(musics_location, i).replace(' ', '\ ') for i in musics if i.endswith(('.mp3', 'm4a'))]
+        music_chains = read_song_list_via_linear_chain(os.path.join(musics_location, 'musics.txt'))
+        music_locations.extend(music_chains)
+        logger.info('All Musics : %s')
+        for music_location in music_locations:
+            logger.info(str(music_location))
+        music_list = music_locations
 
     if mode == 'pygame':
         player = play_a_song_via_pygame
@@ -42,7 +48,7 @@ def random_play(musics_location=None, mode='commandline', times=1):
         return 'Play Mode Error.'
     i = 0
     while i < times:
-        ran_music = music_locations[random.randint(0, len(music_locations) - 1)]
+        ran_music = music_list[random.randint(0, len(music_list) - 1)]
         # logger.info('Music To Be Played: ' + ran_music)
         time.sleep(0.5)
         if not player(ran_music):
@@ -114,7 +120,8 @@ def play_a_song_via_commandline(music):
 def waitKey():
     def wait_key():
         return
-
+    import socket
+    so = socket.socket()
     threading.Thread(target=wait_key)
     return
 
