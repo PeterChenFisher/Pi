@@ -11,11 +11,16 @@ def weather_reporter():
     weather_message = weather_extractor.get_weather()['data']
     date = time.strftime('%Y-%m-%d', time.localtime(time.time()))
     weather_speech_file = Text2Speech.text2speech(text=weather_message, file_name=date)
-    music_play.play_a_song(weather_speech_file)
+    music_play.play_a_song_via_pygame(weather_speech_file)
     return
 
 
 def alarm_oclock():
+    return
+
+
+def tiktoktiktok():
+
     return
 
 

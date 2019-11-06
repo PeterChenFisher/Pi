@@ -3,6 +3,5 @@ build/
 venv/
 .idea/
 excluded/
-__pycache__/
 .vscode/
 *.pyc

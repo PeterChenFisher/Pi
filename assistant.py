@@ -4,7 +4,7 @@ import sys
 
 
 def test():
-    music_play.random_play(musics_location='musics', times=1)
+    music_play.random_play(musics_location='musics', times=3)
     return
 
 
@@ -14,7 +14,7 @@ if __name__ == '__main__':
     else:
         arg = sys.argv[1]
         if arg == 'player':
-            music_play.random_play(musics_location='musics', mode='commandline', times=4)
+            music_play.random_play(musics_location='musics', mode='commandline', times=50)
         elif arg == 'weather':
             schedules.weather_reporter()
         elif arg == 'test':
