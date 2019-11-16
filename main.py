@@ -13,10 +13,10 @@ BackScheduler._logger = logger
 BlockScheduler._logger = logger
 logger.info('PiProjects Scheduler StartUp!')
 # Welcome!
-music_play.random_play('musics')
+# music_play.random_play('musics')
 BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 8), trigger='cron', max_instances=10,
-                       month='*', day='*', hour='6', minute='45')
-BackScheduler.add_job(func=DDingWarn.request_ding,args=([heart_beat_text1],), trigger='cron', max_instances=10,
-                       month='*', day='*', hour='23', minute='00')
+                       month='*', day_of_week='mon,tue,wed,thu,fri', hour='6', minute='45')
+BackScheduler.add_job(func=DDingWarn.request_ding, args=([heart_beat_text2],), trigger='cron', max_instances=10,
+                      month='*', day='*', hour='23', minute='00')
 BackScheduler.start()
 BlockScheduler.start()
