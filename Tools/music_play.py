@@ -1,7 +1,6 @@
 import time
 import sys
 import random
-import pygame
 import os
 # import cv2
 import threading
@@ -15,8 +14,9 @@ elif __name__ != '__main__':
     from .log import logger
     from .DDingWarn import request_ding
 
-pygame.mixer.init()
-pygame.init()
+
+# pygame.mixer.init()
+# pygame.init()
 
 
 def random_play(musics_location=None, mode='commandline', times=1):
@@ -35,7 +35,8 @@ def random_play(musics_location=None, mode='commandline', times=1):
     if music_list == []:
 
         musics = os.listdir(musics_location)
-        music_locations = [os.path.join(musics_location, i).replace(' ', '\ ') for i in musics if i.endswith(('.mp3', 'm4a'))]
+        music_locations = [os.path.join(musics_location, i).replace(' ', '\ ') for i in musics if
+                           i.endswith(('.mp3', 'm4a'))]
         music_chains = read_song_list_via_linear_chain(os.path.join(musics_location, 'musics.txt'))
         music_locations.extend(music_chains)
         logger.info('All Musics :')
@@ -44,7 +45,9 @@ def random_play(musics_location=None, mode='commandline', times=1):
         music_list = music_locations
 
     if mode == 'pygame':
-        player = play_a_song_via_pygame
+        # player = play_a_song_via_pygame
+        mode = 'commandline'
+        player = play_a_song_via_commandline
     elif mode == 'commandline':
         player = play_a_song_via_commandline
     else:
@@ -67,7 +70,7 @@ def read_song_list_via_linear_chain(music_list_file_location=None):
     if music_list_file_location is None:
         os_platform = sys.platform
         if os_platform == 'Linux' or os_platform == 'linux':
-            music_list_file_location = '../musics/musics.txt' # TODO 换成绝对路径
+            music_list_file_location = '../musics/musics.txt'  # TODO 换成绝对路径
         elif os_platform == 'win32':
             music_list_file_location = '..\musics\musics.txt'
         else:
@@ -77,7 +80,7 @@ def read_song_list_via_linear_chain(music_list_file_location=None):
     with open(music_list_file_location, 'r', encoding='utf-8') as music_list_file:
         lines = music_list_file.readlines()
         for line in lines:
-            if line.startswith('#') or line == '\n' :
+            if line.startswith('#') or line == '\n':
                 continue
             if line.startswith('http://music.163.com/'):
                 music_id = line.split('id=')[1].split('&')[0]
@@ -92,18 +95,18 @@ def read_song_list_via_linear_chain(music_list_file_location=None):
     return music_id_list
 
 
-def play_a_song_via_pygame(music):
-    try:
-        pygame.mixer.music.load(music)
-        pygame.mixer.music.play()
-        while (pygame.mixer.music.get_busy()):
-            time.sleep(1)
-            # if cv2.waitKey(1) & 0xFF == ord('q'):
-            #     break
-        return True
-    except Exception as e:
-        request_ding(result=['Play Music Failed.Let us Do it Again. Msg:%s' % e])
-        return False
+# def play_a_song_via_pygame(music):
+#     try:
+#         pygame.mixer.music.load(music)
+#         pygame.mixer.music.play()
+#         while (pygame.mixer.music.get_busy()):
+#             time.sleep(1)
+#             # if cv2.waitKey(1) & 0xFF == ord('q'):
+#             #     break
+#         return True
+#     except Exception as e:
+#         request_ding(result=['Play Music Failed.Let us Do it Again. Msg:%s' % e])
+#         return False
 
 
 def play_a_song_via_commandline(music):
@@ -116,7 +119,7 @@ def play_a_song_via_commandline(music):
         logger.info('Music Successfuly Played.')
         return True
     else:
-        request_ding(result=['Failed to play the music.The music is %s'%music])
+        request_ding(result=['Failed to play the music.The music is %s' % music])
         return False
 
 
@@ -125,6 +128,7 @@ def waitKey():
         import socket
         so = socket.socket()
         return
+
     import socket
     so = socket.socket()
     threading.Thread(target=wait_key)
