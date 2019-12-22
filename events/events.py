@@ -14,8 +14,9 @@ def send_ip_address_to_dding():
 
 
 def starting_up():
-    th = threading.Thread(target=send_ip_address_to_dding)
-    th.start()
+    ip_addr_report_threading = threading.Thread(target=send_ip_address_to_dding)
+    ip_addr_report_threading.start()
+    DDingWarn.request_ding(['你的石头派项目正在启动！'])
     return
 
 
