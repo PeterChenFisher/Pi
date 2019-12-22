@@ -1,28 +1,25 @@
-from Spiders import weather_extractor
-from Tools import Text2Speech, music_play
-import time
+from tools import music_play, DDingWarn
+import config
 
 
-def music_player():
+def add_block_schedule_jobs(BlockScheduler):
+    BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 8), trigger='cron',
+                           max_instances=10,
+                           month='*', day_of_week='mon,tue,wed,thu,fri', hour='6', minute='45')
+    BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 8), trigger='cron',
+                           max_instances=10,
+                           month='*', day_of_week='sat,sun', hour='8', minute='30')
     return
 
 
-def weather_reporter():
-    weather_message = weather_extractor.get_weather()['data']
-    date = time.strftime('%Y-%m-%d', time.localtime(time.time()))
-    weather_speech_file = Text2Speech.text2speech(text=weather_message, file_name=date)
-    music_play.play_a_song_via_pygame(weather_speech_file)
+def add_back_schedule_jobs(BackScheduler):
+    BackScheduler.add_job(func=DDingWarn.request_ding, args=([config.heart_beat_text2],), trigger='cron',
+                          max_instances=10,
+                          month='*', day='*', hour='23', minute='00')
+    BackScheduler.add_job(func=DDingWarn.request_ding, args=([config.heart_beat_text2],), trigger='cron',
+                          max_instances=10,
+                          month='*', day_of_week='sat,sun', hour='8', minute='49')
+    BackScheduler.add_job(func=DDingWarn.request_ding, args=([config.heart_beat_text2],), trigger='cron',
+                          max_instances=10,
+                          month='*', day_of_week='mon,tue,wed,thu,fri', hour='6', minute='45')
     return
-
-
-def alarm_oclock():
-    return
-
-
-def tiktoktiktok():
-
-    return
-
-
-if __name__ == '__main__':
-    weather_reporter()

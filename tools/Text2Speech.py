@@ -1,7 +1,7 @@
 import os
 import requests
 import config
-from Tools.log import logger
+from tools.log import logger
 
 # 以下注释代码作用为获取调用百度api的token，auth为返回的结果
 # APIKey = 'bpLlUme0C61GisOY9Ce2QYzu'

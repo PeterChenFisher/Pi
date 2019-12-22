@@ -1,5 +1,5 @@
-from Tools import music_play
-from events import schedules
+from tools import music_play
+from events import events
 import sys
 
 
@@ -16,7 +16,7 @@ if __name__ == '__main__':
         if arg == 'player':
             music_play.random_play(musics_location='musics', mode='commandline', times=50)
         elif arg == 'weather':
-            schedules.weather_reporter()
+            events.weather_reporter()
         elif arg == 'test':
             test()
 
