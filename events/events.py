@@ -1,5 +1,6 @@
 from tools import ip_update, DDingWarn
 import threading
+import projects
 
 
 def send_ip_address_to_dding():
@@ -21,5 +22,4 @@ def starting_up():
 
 
 def initiator():
-
     return
