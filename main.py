@@ -1,6 +1,6 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
-from tools import music_play, log, DDingWarn
+from tools import log, DDingWarn
 import events
 
 # 测试代码
@@ -27,3 +27,6 @@ if __name__ == '__main__':
 
     # 从启动器启动任务
     events.events.initiator()
+
+    # 报告钉钉：启动成功
+    DDingWarn.request_ding(['[ 石头派 ] 启动成功了！'])
