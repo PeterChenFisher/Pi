@@ -1,28 +1,29 @@
-import time
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
-from Tools import music_play, log, DDingWarn
-from config import *
+from tools import music_play, log, DDingWarn
+import events
 
-logger = log.logger
+# 测试代码
+debug = False
+events.debug_code(debug)
 
-logger.info('PiProjects Initiating...')
-BlockScheduler = BlockingScheduler()
-BackScheduler = BackgroundScheduler()
-BackScheduler._logger = logger
-BlockScheduler._logger = logger
-logger.info('PiProjects Scheduler StartUp!')
-# Welcome!
-# music_play.random_play('musics')
-BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 8), trigger='cron', max_instances=10,
-                       month='*', day_of_week='mon,tue,wed,thu,fri', hour='6', minute='45')
-BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 8), trigger='cron', max_instances=10,
-                       month='*', day_of_week='sat,sun', hour='8', minute='30')
-BackScheduler.add_job(func=DDingWarn.request_ding, args=([heart_beat_text2],), trigger='cron', max_instances=10,
-                      month='*', day='*', hour='23', minute='00')
-BackScheduler.add_job(func=DDingWarn.request_ding, args=([heart_beat_text2],), trigger='cron', max_instances=10,
-                      month='*', day_of_week='sat,sun', hour='8', minute='49')
-BackScheduler.add_job(func=DDingWarn.request_ding, args=([heart_beat_text2],), trigger='cron', max_instances=10,
-                      month='*', day_of_week='mon,tue,wed,thu,fri', hour='6', minute='45')
-BackScheduler.start()
-BlockScheduler.start()
+if __name__ == '__main__':
+    # 程序启动初始化
+    logger = log.logger
+    events.starting_up()
+
+    # 初始化任务调度器
+    BlockScheduler = BlockingScheduler()
+    BackScheduler = BackgroundScheduler()
+    BackScheduler._logger = logger
+    BlockScheduler._logger = logger
+    logger.info('[ 石头派 ] 的 [ 任务调度器 ] 初始化完成')
+
+    # 在调度器上增加
+    events.schedules.add_block_schedule_jobs(BlockScheduler)
+    events.schedules.add_back_schedule_jobs(BackScheduler)
+    BackScheduler.start()
+    BlockScheduler.start()
+
+    # 从启动器启动任务
+    events.events.initiator()

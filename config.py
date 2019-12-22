@@ -6,7 +6,14 @@ tts_location = os.path.join(excluded_file, 'tts')
 
 heart_beat_text1 = 'Your RaspberryPi Project Is Still Alive, The Oclock Will Sing You Up Tomorrow! Good Nigth!'
 heart_beat_text2 = '你的树莓派正在正常运行，明天你的音乐闹钟将继续响起！晚安！'
-dingding_url = 'https://oapi.dingtalk.com/robot/send?access_token=a056448cc63311f9424ab99da711481f83fd800d08fbda49b36a4120929016bb'
+
+# 钉钉链接
+class Dingding():
+    # 晨祷灵修
+    dingding_url = 'https://oapi.dingtalk.com/robot/send?access_token=a056448cc63311f9424ab99da711481f83fd800d08fbda49b36a4120929016bb'
+    # 石头派
+    stone_pi = 'https://oapi.dingtalk.com/robot/send?access_token=d1103bb860b1a984d0bc21b6cd6c4d885914f51b08de6881fd77d8ddb10511ca'
+
 
 def mk_dirs(dirs):
     for dir in dirs:
