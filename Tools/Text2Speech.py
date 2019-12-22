@@ -2,6 +2,7 @@ import os
 import requests
 import config
 from Tools.log import logger
+from aip import AipSpeech
 
 # 以下注释代码作用为获取调用百度api的token，auth为返回的结果
 # APIKey = 'bpLlUme0C61GisOY9Ce2QYzu'
@@ -35,6 +36,7 @@ aue = 3  # 3为mp3格式(默认)； 4为pcm-16k；5为pcm-8k；6为wav（内容�
 
 # 注意aue=4或者6是语音识别要求的格式，但是音频内容不是语音识别要求的自然人发音，所以识别效果会受影响。
 
+client = AipSpeech()
 
 def text2speech(text, file_location=config.tts_location, file_name=None):
     if not os.path.exists(file_location):
@@ -53,4 +55,6 @@ def text2speech(text, file_location=config.tts_location, file_name=None):
 
 if __name__ == '__main__':
     text = '我是一点都不想你。'
-    text2speech(text, file_location='.')
+    F = text2speech(text, file_location='.')
+    print(F)
+
