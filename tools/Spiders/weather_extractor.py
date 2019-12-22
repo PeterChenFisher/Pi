@@ -1,7 +1,7 @@
 import time
 import requests
-from Tools.reply_template import *
-from Tools.log import logger
+from tools.reply_template import *
+from tools.log import logger
 from bs4 import BeautifulSoup
 
 weather_url = 'https://tianqi.moji.com/weather/china/guangdong/shantou'

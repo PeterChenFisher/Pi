@@ -5,12 +5,13 @@ from .log import logger
 import json
 
 
-def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0):
+def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0, ding_url=None):
     content = ('\n\n'.join(result)) if result != '' else ''
     if content == '':
         logger.info('Empty message.')
         return
-    ding_url = config.dingding_url
+    if not ding_url:
+        ding_url = config.Dingding.stone_pi
     atMobiles = None
     if Warning:
         atMobiles = 18819254603
@@ -46,5 +47,3 @@ def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0):
             logger.warning('Request Dingding a lot times but all failed.')
             return
         request_ding(result, Warning, isAtAll, request_ding_time)
-if __name__ == '__main__':
-    request_ding([config.heart_beat_text1])
