@@ -12,6 +12,9 @@ if __name__ == '__main__':
     logger = log.logger
     events.starting_up()
 
+    # 从启动器启动任务
+    events.events.initiator()
+
     # 初始化任务调度器
     BlockScheduler = BlockingScheduler()
     BackScheduler = BackgroundScheduler()
@@ -24,9 +27,3 @@ if __name__ == '__main__':
     events.schedules.add_back_schedule_jobs(BackScheduler)
     BackScheduler.start()
     BlockScheduler.start()
-
-    # 从启动器启动任务
-    events.events.initiator()
-
-    # 报告钉钉：启动成功
-    DDingWarn.request_ding(['[ 石头派 ] 启动成功了！'])
