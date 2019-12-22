@@ -7,7 +7,7 @@ html5lib==1.0.1
 idna==2.8
 numpy==1.17.0
 opencv-python==4.1.0.25
-pkg-resources==0.0.0
+# pkg-resources==0.0.0
 pygame==1.9.6
 pyttsx==1.1
 pyttsx3==2.71
