@@ -11,6 +11,8 @@ logger = log.logger
 # 检查网络连同性
 def wait_network_on():
     if_network_on = False
+    logger.info('Checking Network...')
+    times = 0
     while True:
         remote_server = "www.baidu.com"
         try:
@@ -22,7 +24,9 @@ def wait_network_on():
             s.close()
             return if_network_on
         except Exception as e:
-            logger.info(f'NetWork Disconnected...{e}')
+            times += 1
+            if times % 20 == 0:
+                logger.info(f'NetWork Disconnected... {e}')
         time.sleep(5)
 
 
