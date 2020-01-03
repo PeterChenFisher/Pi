@@ -9,6 +9,13 @@ def test():
 
 
 if __name__ == '__main__':
+    from tools import ip_update
+
+    net = ip_update.wait_network_on()
+    print(net)
+    import sys
+
+    sys.exit()
     if len(sys.argv) < 2:
         test()
     else:
