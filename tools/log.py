@@ -33,4 +33,4 @@ def logger_generator(log_path, logger_name, when='midnight', logger=None):
     return logger
 
 
-logger = logger_generator(logger_name='石头派', log_path=config.log_path)
+logger = logger_generator(logger_name='PeterPi', log_path=config.log_path)
