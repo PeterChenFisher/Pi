@@ -22,4 +22,6 @@ def starting_up():
 
 
 def initiator():
+    # 程序初始化：初始时候需要启动的线程和任务
+    starting_up()
     return

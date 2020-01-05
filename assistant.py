@@ -1,21 +1,19 @@
 from tools import music_play
 from events import events
 import sys
+from config import *
+
+mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
 
 def test():
-    music_play.random_play(musics_location='musics', times=3)
+    # music_play.random_play(musics_location='musics', times=3)
+    from events import heart_beats
+    heart_beats.TimeReporting()
     return
 
 
 if __name__ == '__main__':
-    from tools import ip_update
-
-    net = ip_update.wait_network_on()
-    print(net)
-    import sys
-
-    sys.exit()
     if len(sys.argv) < 2:
         test()
     else:

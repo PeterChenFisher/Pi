@@ -14,7 +14,7 @@ def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0, ding
         ding_url = config.Dingding.stone_pi
     atMobiles = None
     if Warning:
-        atMobiles = 18819254603
+        atMobiles = None
     logger.warning('warning-message: \n' + content)
     data = {
         "msgtype": "text",

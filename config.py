@@ -1,11 +1,14 @@
 import os
 
 excluded_file = 'excluded'
+excluded_file = os.path.abspath(excluded_file)
 log_path = os.path.join(excluded_file, 'log')
 tts_location = os.path.join(excluded_file, 'tts')
+time_report_tts_location = os.path.join(tts_location, 'time_report')
 
 heart_beat_text1 = 'Your RaspberryPi Project Is Still Alive, The Oclock Will Sing You Up Tomorrow! Good Nigth!'
 heart_beat_text2 = '你的树莓派正在正常运行，明天你的音乐闹钟将继续响起！晚安！'
+
 
 # 钉钉链接
 class Dingding():
@@ -23,5 +26,4 @@ def mk_dirs(dirs):
         except:
             continue
 
-
-mk_dirs([excluded_file, tts_location])
+# mk_dirs([excluded_file, tts_location, time_report_tts_location])
