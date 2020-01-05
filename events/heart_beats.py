@@ -15,6 +15,7 @@ def TimeReporting():
     file_name = f'TimeReport_{hour}-{minute}.mp3'
     file_name = os.path.join(time_report_tts_location, file_name)
     if os.path.isfile(file_name):
+        logger.info(f'Music File Name:{file_name}')
         play_a_song_via_commandline(music=file_name)
         logger.info('Successfully Reported the Time.')
         return
