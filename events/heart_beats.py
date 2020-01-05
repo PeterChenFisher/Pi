@@ -1,20 +1,36 @@
 from tools.log import logger
 from tools.Text2Speech import text2speech
+from config import *
 # from tools.music_play import play_a_song_via_pygame
 from tools.music_play import play_a_song_via_commandline
 import time
+import os
+from tools.templates import *
 
 
-def WholeTimeReporting():
-    hour = time.localtime()[3]
-    text = '现在是%d点整' % hour
-    text_voice = text2speech(text, file_name='TimeReport_%d' % hour)
-    # play_a_song_via_pygame(text_voice)
-    time.sleep(3)
-    play_a_song_via_commandline(text_voice)
-    print(text_voice)
-    return
+def TimeReporting():
+    now = time.localtime()
+    hour, minute = now[3], now[4]
+    text = f'现在是{hour}点{minute}分'
+    file_name = f'TimeReport_{hour}-{minute}.mp3'
+    file_name = os.path.join(time_report_tts_location, file_name)
+    if os.path.isfile(file_name):
+        play_a_song_via_commandline(music=file_name)
+        logger.info('Successfully Reported the Time.')
+        return
+    else:
+        text_voice = text2speech(text, file_name=file_name)
+        if text_voice[key_success]:
+            file_name = text_voice[key_message]
+            play_a_song_via_commandline(music=file_name)
+            logger.info('Successfully Reported the Time.')
+            return
+        else:
+            logger.warning(f'Time Reporting Failed.{text_voice[key_message]}')
+        return
 
 
 if __name__ == '__main__':
-    WholeTimeReporting()
+    # WholeTimeReporting()
+    now = time.localtime()
+    print(now[4])
