@@ -110,8 +110,8 @@ def read_song_list_via_linear_chain(music_list_file_location=None):
 
 
 def play_a_song_via_commandline(music):
-    logger.info(f'Music is {music}')
-    commandline = 'mplayer ' + music
+    logger.info(f'Music is {str(music)}')
+    commandline = 'mplayer ' + str(music)
     logger.info('The CommandLine is: ' + commandline)
     result = os.system(commandline)
     # logger.info('After Playing Music.')
