@@ -1,4 +1,4 @@
-# 网易云音乐直链编号
+﻿# 网易云音乐直链编号
 
 # Neon Light
 http://music.163.com/song?id=28953484&userid=129882220
@@ -8,12 +8,6 @@ http://music.163.com/song?id=3950792&userid=129882220
 http://music.163.com/song?id=30496792&userid=129882220
 # Man on a Mission
 http://music.163.com/song?id=465920383&userid=129882220
-# Running Home to You
-http://music.163.com/song?id=19887494&userid=129882220
-# 光辉岁月
-# http://music.163.com/song?id=346576&userid=129882220
-# Hotel California
-http://music.163.com/song?id=26289183&userid=129882220
 # 梦想天空分外蓝
 http://music.163.com/song?id=25638273&userid=129882220
 # Hooked on a Feeling
@@ -28,11 +22,5 @@ http://music.163.com/song?id=447926071&userid=129882220
 http://music.163.com/song?id=5041604&userid=129882220
 # 天行九歌
 http://music.163.com/song?id=414118616&userid=129882220
-# 一次就好
-http://music.163.com/song?id=35470197&userid=129882220
 # 苦瓜
 http://music.163.com/song?id=64293&userid=129882220
-# 陪你度过漫长岁月
-# http://music.163.com/song?id=35403523&userid=129882220
-# 老男孩
-http://music.163.com/#/m/song?id=362998
