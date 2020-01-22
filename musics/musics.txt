@@ -4,8 +4,6 @@
 http://music.163.com/song?id=28953484&userid=129882220
 # As Long as You Love Me
 http://music.163.com/song?id=3950792&userid=129882220
-# Love Me Like You Do
-http://music.163.com/song?id=30496792&userid=129882220
 # Man on a Mission
 http://music.163.com/song?id=465920383&userid=129882220
 # 梦想天空分外蓝

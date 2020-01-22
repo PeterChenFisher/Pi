@@ -2,21 +2,15 @@ import time
 import sys
 import random
 import os
-# import cv2
-import threading
+import cv2
+import pygame
+from .log import logger
+from .DDingWarn import request_ding
 
 music_list = []
 
-if __name__ == '__main__':
-    from log import logger
-    from DDingWarn import request_ding
-elif __name__ != '__main__':
-    from .log import logger
-    from .DDingWarn import request_ding
-
-
-# pygame.mixer.init()
-# pygame.init()
+pygame.mixer.init()
+pygame.init()
 
 
 def random_play(musics_location=None, mode='commandline', times=1):
@@ -27,13 +21,12 @@ def random_play(musics_location=None, mode='commandline', times=1):
         if os_platform == 'Linux':
             musics_location = '../musics'
         elif os_platform == 'win32':
-            musics_location = '..\musics'
+            musics_location = '..\\musics'
         else:
             logger.warning('System Estimate Failed.Exit.')
             return 'System error'
 
-    if music_list == []:
-
+    if not music_list:
         musics = os.listdir(musics_location)
         music_locations = [os.path.join(musics_location, i).replace(' ', '\ ') for i in musics if
                            i.endswith(('.mp3', 'm4a'))]
@@ -45,11 +38,11 @@ def random_play(musics_location=None, mode='commandline', times=1):
         music_list = music_locations
 
     if mode == 'pygame':
-        # player = play_a_song_via_pygame
-        mode = 'commandline'
-        player = play_a_song_via_commandline
+        player = pygame_player
+        # mode = 'commandline'
+        # player = play_a_song_via_commandline
     elif mode == 'commandline':
-        player = play_a_song_via_commandline
+        player = pi_mplayer
     else:
         return 'Play Mode Error.'
     i = 0
@@ -95,21 +88,22 @@ def read_song_list_via_linear_chain(music_list_file_location=None):
     return music_id_list
 
 
-# def play_a_song_via_pygame(music):
-#     try:
-#         pygame.mixer.music.load(music)
-#         pygame.mixer.music.play()
-#         while (pygame.mixer.music.get_busy()):
-#             time.sleep(1)
-#             # if cv2.waitKey(1) & 0xFF == ord('q'):
-#             #     break
-#         return True
-#     except Exception as e:
-#         request_ding(result=['Play Music Failed.Let us Do it Again. Msg:%s' % e])
-#         return False
+def pygame_player(music):
+    try:
+        pygame.mixer.music.load(music)
+        pygame.mixer.music.play()
+        while (pygame.mixer.music.get_busy()):
+            time.sleep(1)
+            # noinspection PyUnresolvedReferences
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+        return True
+    except Exception as e:
+        request_ding(result=['Play Music Failed.Let us Do it Again. Msg:%s' % e])
+        return False
 
 
-def play_a_song_via_commandline(music):
+def pi_mplayer(music):
     logger.info(f'Music is {str(music)}')
     commandline = 'mplayer ' + str(music)
     logger.info('The CommandLine is: ' + commandline)
@@ -124,27 +118,21 @@ def play_a_song_via_commandline(music):
         return False
 
 
-def waitKey():
-    def wait_key():
-        import socket
-        so = socket.socket()
-        return
-
-    import socket
-    so = socket.socket()
-    threading.Thread(target=wait_key)
-    return
-
-
-def reform_music_file_names(musics_location='.\musics'):
-    musics = os.listdir(musics_location)
-    music_locations = [os.path.join(musics_location, i) for i in musics if i.endswith(('.mp3', 'm4a'))]
-    for location in music_locations:
-        os.rename(location, location.replace(' ', ''))
-    return
-
-
-if __name__ == '__main__':
-    random_play(times=10)
-    # read_song_list_via_linear_chain()
-    # random_play(mode='commandline')
+def py_game_player(file):
+    pygame.mixer.init()
+    print("播报天气")
+    pygame.mixer.music.load(file)
+    pygame.mixer.music.play(loops=1, start=0.0)
+    print("播放音乐")
+    while True:
+        if pygame.mixer.music.get_busy() == 0:
+            # Linux 配置定时任务要设置绝对路径
+            mp3 = "/home/pi/alarmClock/" + str(random.randint(1, 6)) + ".mp3"
+            # mp3 = str(random.randint(1, 6)) + ".mp3"
+            pygame.mixer.music.load(mp3)
+            pygame.mixer.music.play(loops=1, start=0.0)
+            break
+    while True:
+        if pygame.mixer.music.get_busy() == 0:
+            print("播报完毕，起床啦")
+            break

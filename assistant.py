@@ -9,7 +9,7 @@ mk_dirs([excluded_file, tts_location, time_report_tts_location])
 def test():
     # music_play.random_play(musics_location='musics', times=3)
     from events import heart_beats
-    heart_beats.TimeReporting()
+    heart_beats.time_reporting()
     return
 
 

@@ -1,6 +1,13 @@
-from tools import ip_update, DDingWarn
+from tools import ip_update, DDingWarn, socket_wait
 import threading
 import projects
+
+
+def initiator():
+    # 程序初始化：初始时候需要启动的线程和任务
+    starting_up()
+    # wait_sig_and_check()
+    return
 
 
 def send_ip_address_to_dding():
@@ -21,7 +28,9 @@ def starting_up():
     return
 
 
-def initiator():
-    # 程序初始化：初始时候需要启动的线程和任务
-    starting_up()
+def wait_sig_and_check(func_to_run):
+    wait_socket_th = threading.Thread(target=socket_wait.socket_wait, daemon=True)
+    wait_socket_th.start()
+    wait_sig_and_run_th = threading.Thread(target=socket_wait.wait_signal_and_run, args=(func_to_run,), daemon=True)
+    wait_sig_and_run_th.start()
     return
