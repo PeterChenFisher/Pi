@@ -1,6 +1,4 @@
-﻿# 网易云音乐直链编号
-
-# Neon Light
+﻿# Neon Light
 http://music.163.com/song?id=28953484&userid=129882220
 # As Long as You Love Me
 http://music.163.com/song?id=3950792&userid=129882220
@@ -10,8 +8,6 @@ http://music.163.com/song?id=465920383&userid=129882220
 http://music.163.com/song?id=25638273&userid=129882220
 # Hooked on a Feeling
 http://music.163.com/song?id=28864234&userid=129882220
-# Way Back Into Love
-http://music.163.com/song?id=5046367&userid=129882220
 # Wonderful You
 http://music.163.com/song?id=406475394&userid=129882220
 # 成都
