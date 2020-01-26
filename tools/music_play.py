@@ -2,7 +2,7 @@ import time
 import sys
 import random
 import os
-import cv2
+# import cv2
 import pygame
 from .log import logger
 from .DDingWarn import request_ding
@@ -95,8 +95,8 @@ def pygame_player(music):
         while (pygame.mixer.music.get_busy()):
             time.sleep(1)
             # noinspection PyUnresolvedReferences
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+            # if cv2.waitKey(1) & 0xFF == ord('q'):
+            #     break
         return True
     except Exception as e:
         request_ding(result=['Play Music Failed.Let us Do it Again. Msg:%s' % e])
