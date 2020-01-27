@@ -2,4 +2,5 @@
 # set up for pi running
 sleep 10
 cd /home/pi/Projects/Pi/
-/usr/bin/python3 /home/pi/Projects/Pi/main.py &
+source /home/pi/Projects/Pi/venv/bin/activate
+python3 /home/pi/Projects/Pi/main.py &
