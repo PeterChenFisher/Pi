@@ -6,14 +6,39 @@ import os
 import pygame
 from .log import logger
 from .DDingWarn import request_ding
+from config import *
 
 music_list = []
+pure_music_list = []
 
 pygame.mixer.init()
 pygame.init()
 
 
-def random_play(musics_location=None, mode='commandline', times=1):
+def read_pure_music(musics_location=None):
+    global pure_music_list
+
+    if not musics_location:
+        os_platform = sys.platform
+        if os_platform == 'Linux':
+            musics_location = '../musics/PureMusics'
+        elif os_platform == 'win32':
+            musics_location = '..\\musics\\PureMusics'
+        else:
+            logger.warning('System Estimate Failed.Exit.')
+            return 'System error'
+
+    if not pure_music_list:
+        musics = os.listdir(musics_location)
+        pure_music_list = [os.path.join(musics_location, i).replace(' ', '\ ') for i in musics if
+                           i.endswith(('.mp3', 'm4a'))]
+        logger.info('All Musics :')
+        for music_location in pure_music_list:
+            logger.info(str(music_location))
+    return
+
+
+def read_musics(musics_location=None):
     global music_list
 
     if not musics_location:
@@ -37,17 +62,32 @@ def random_play(musics_location=None, mode='commandline', times=1):
             logger.info(str(music_location))
         music_list = music_locations
 
-    if mode == 'pygame':
+    return
+
+
+def random_play(musics_location=None, method='commandline', times=1, mode=normal_music):
+    global music_list, pure_music_list
+
+    if mode == normal_music:
+        musics = music_list
+    elif mode == pure_music:
+        musics = pure_music_list
+    else:
+        request_ding(result=['播放模式设置错误', '请检查代码，重新设置播放模式'])
+        return
+    if not music_list or pure_music_list:
+        read_musics(musics_location)
+        read_pure_music(musics_location)
+
+    if method == 'pygame':
         player = pygame_player
-        # mode = 'commandline'
-        # player = play_a_song_via_commandline
-    elif mode == 'commandline':
+    elif method == 'commandline':
         player = pi_mplayer
     else:
         return 'Play Mode Error.'
     i = 0
     while i < times:
-        ran_music = music_list[random.randint(0, len(music_list) - 1)]
+        ran_music = musics[random.randint(0, len(musics) - 1)]
         # logger.info('Music To Be Played: ' + ran_music)
         time.sleep(0.5)
         if not player(ran_music):

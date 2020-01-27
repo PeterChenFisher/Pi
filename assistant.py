@@ -19,7 +19,7 @@ if __name__ == '__main__':
     else:
         arg = sys.argv[1]
         if arg == 'player':
-            music_play.random_play(musics_location='musics', mode='commandline', times=50)
+            music_play.random_play(musics_location='musics', method='commandline', times=50)
         elif arg == 'weather':
             events.weather_reporter()
         elif arg == 'test':
