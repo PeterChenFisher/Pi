@@ -63,9 +63,9 @@ def read_song_list_via_linear_chain(music_list_file_location=None):
     if music_list_file_location is None:
         os_platform = sys.platform
         if os_platform == 'Linux' or os_platform == 'linux':
-            music_list_file_location = '../musics/musics.txt'  # TODO 换成绝对路径
+            music_list_file_location = 'musics/musics.txt'  # TODO 换成绝对路径
         elif os_platform == 'win32':
-            music_list_file_location = '..\musics\musics.txt'
+            music_list_file_location = 'musics\musics.txt'
         else:
             logger.warning('Judge System Failed.Exit.')
             return 'System error'
@@ -73,7 +73,7 @@ def read_song_list_via_linear_chain(music_list_file_location=None):
     with open(music_list_file_location, 'r', encoding='utf-8') as music_list_file:
         lines = music_list_file.readlines()
         for line in lines:
-            if line.startswith('#') or line == '\n':
+            if '#' in line or line == '\n':
                 continue
             if line.startswith('http://music.163.com/'):
                 music_id = line.split('id=')[1].split('&')[0]
@@ -94,12 +94,9 @@ def pygame_player(music):
         pygame.mixer.music.play()
         while (pygame.mixer.music.get_busy()):
             time.sleep(1)
-            # noinspection PyUnresolvedReferences
-            # if cv2.waitKey(1) & 0xFF == ord('q'):
-            #     break
         return True
     except Exception as e:
-        request_ding(result=['Play Music Failed.Let us Do it Again. Msg:%s' % e])
+        request_ding(result=[f'Py Game 播放音乐失败，歌曲：{music} 错误信息：{e}'])
         return False
 
 
@@ -114,7 +111,7 @@ def pi_mplayer(music):
         logger.info('Music Successfuly Played.')
         return True
     else:
-        request_ding(result=['Failed to play the music.The music is %s' % music])
+        request_ding(result=[f'音乐播放失败！这首歌是： {music}'])
         return False
 
 
