@@ -8,7 +8,7 @@ import json
 def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0, ding_url=None):
     if type(result) != list:
         result = ['告警信息格式错误了！应该发送一个错误信息列表过来~']
-    result.append('    来自石头派的问候！')
+    result.append('    来自石头派的问候！愿你平安！')
     content = ('\n'.join(result)) if result != '' else ''
     if content == '':
         logger.info('Empty message.')
