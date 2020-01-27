@@ -15,7 +15,7 @@ def send_ip_address_to_dding():
         ip_addr = ip_update.get_ip_address()
         message_result = [
             '你的树莓派IP地址是：',
-            ip_addr
+            f'    {ip_addr}'
         ]
         DDingWarn.request_ding(result=message_result)
     return
