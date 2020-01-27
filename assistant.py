@@ -8,7 +8,7 @@ mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
 def test():
     # music_play.random_play(musics_location='musics', times=3, mode='pygame')
-    li = music_play.read_song_list_via_linear_chain()
+    li = music_play.read_pure_music()
     print(li)
     return
 

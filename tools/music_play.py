@@ -21,9 +21,9 @@ def read_pure_music(musics_location=None):
     if not musics_location:
         os_platform = sys.platform
         if os_platform == 'Linux':
-            musics_location = '../musics/PureMusics'
+            musics_location = 'musics/PureMusics'
         elif os_platform == 'win32':
-            musics_location = '..\\musics\\PureMusics'
+            musics_location = 'musics\\PureMusics'
         else:
             logger.warning('System Estimate Failed.Exit.')
             return 'System error'
