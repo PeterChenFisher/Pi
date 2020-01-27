@@ -1,5 +1,4 @@
 from tools import music_play, DDingWarn
-from events import heart_beats
 from config import *
 
 

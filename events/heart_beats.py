@@ -1,7 +1,6 @@
 from tools.log import logger
 from tools.Text2Speech import text2speech
 from config import *
-# from tools.music_play import play_a_song_via_pygame
 from tools.music_play import pi_mplayer
 import time
 import os
