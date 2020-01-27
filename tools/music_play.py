@@ -44,9 +44,9 @@ def read_musics(musics_location=None):
     if not musics_location:
         os_platform = sys.platform
         if os_platform == 'Linux':
-            musics_location = '../musics'
+            musics_location = '/musics'
         elif os_platform == 'win32':
-            musics_location = '..\\musics'
+            musics_location = '\\musics'
         else:
             logger.warning('System Estimate Failed.Exit.')
             return 'System error'
