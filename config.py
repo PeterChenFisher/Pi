@@ -6,8 +6,10 @@ log_path = os.path.join(excluded_file, 'log')
 tts_location = os.path.join(excluded_file, 'tts')
 time_report_tts_location = os.path.join(tts_location, 'time_report')
 
-heart_beat_text1 = 'Your RaspberryPi Project Is Still Alive, The Oclock Will Sing You Up Tomorrow! Good Nigth!'
-heart_beat_text2 = '你的树莓派正在正常运行，明天你的音乐闹钟将继续响起！晚安！'
+heart_beat_text2 = '早点睡觉！晚安！'
+
+normal_music = 'NormalMusic'
+pure_music = 'PureMusic'
 
 
 # 钉钉链接
