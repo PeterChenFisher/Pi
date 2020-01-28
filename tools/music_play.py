@@ -43,7 +43,7 @@ def read_musics(musics_location=None):
 
     if not musics_location:
         os_platform = sys.platform
-        if os_platform == 'Linux':
+        if os_platform == 'linux':
             musics_location = 'musics'
         elif os_platform == 'win32':
             musics_location = 'musics'
@@ -93,7 +93,6 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
         time.sleep(0.5)
         if not player(ran_music):
             logger.warning('Music: ' + ran_music)
-            continue
         i += 1
 
 
