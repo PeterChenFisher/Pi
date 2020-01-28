@@ -7,8 +7,6 @@ mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
 
 def test():
-    # music_play.random_play(musics_location='musics', times=3, mode='pygame')
-    music_play.random_play(times=1, mode=pure_music)
     return
 
 
@@ -18,8 +16,10 @@ if __name__ == '__main__':
     else:
         arg = sys.argv[1]
         if arg == 'player':
-            music_play.random_play(musics_location='musics', method='commandline', times=50)
+            music_play.random_play(method='commandline', times=50)
+        elif arg == 'pure_player':
+            music_play.random_play(method='commandline', times=50, mode=pure_music)
+        elif arg == 'mix_player':
+            music_play.random_play(method='commandline', times=50, mode=mix_music)
         elif arg == 'test':
             test()
-
-# TODO 实现带空格歌曲名字的mplayer播放

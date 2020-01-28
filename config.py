@@ -10,6 +10,7 @@ heart_beat_text2 = '早点睡觉！晚安！'
 
 normal_music = 'NormalMusic'
 pure_music = 'PureMusic'
+mix_music = 'MinMusic'
 
 
 # 钉钉链接
