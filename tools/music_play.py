@@ -20,7 +20,7 @@ def read_pure_music(musics_location=None):
 
     if not musics_location:
         os_platform = sys.platform
-        if os_platform == 'Linux':
+        if os_platform == 'linux':
             musics_location = 'musics/PureMusics'
         elif os_platform == 'win32':
             musics_location = 'musics\\PureMusics'
