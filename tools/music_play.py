@@ -44,9 +44,9 @@ def read_musics(musics_location=None):
     if not musics_location:
         os_platform = sys.platform
         if os_platform == 'Linux':
-            musics_location = '/musics'
+            musics_location = 'musics'
         elif os_platform == 'win32':
-            musics_location = '\\musics'
+            musics_location = 'musics'
         else:
             logger.warning('System Estimate Failed.Exit.')
             return 'System error'
@@ -68,6 +68,10 @@ def read_musics(musics_location=None):
 def random_play(musics_location=None, method='commandline', times=1, mode=normal_music):
     global music_list, pure_music_list
 
+    if not music_list or pure_music_list:
+        read_musics(musics_location)
+        read_pure_music(musics_location)
+
     if mode == normal_music:
         musics = music_list
     elif mode == pure_music:
@@ -75,9 +79,6 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
     else:
         request_ding(result=['播放模式设置错误', '请检查代码，重新设置播放模式'])
         return
-    if not music_list or pure_music_list:
-        read_musics(musics_location)
-        read_pure_music(musics_location)
 
     if method == 'pygame':
         player = pygame_player
