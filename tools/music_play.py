@@ -76,6 +76,8 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
         musics = music_list
     elif mode == pure_music:
         musics = pure_music_list
+    elif mode == mix_music:
+        musics = pure_music_list.extend(music_list)
     else:
         request_ding(result=['播放模式设置错误', '请检查代码，重新设置播放模式'])
         return
