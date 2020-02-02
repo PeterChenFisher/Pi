@@ -7,7 +7,8 @@ mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
 
 def test():
-    music_play.random_play(method='commandline', times=1, mode=mix_music)
+    from events.events import daily_scripture
+    daily_scripture()
     return
 
 
