@@ -21,6 +21,12 @@ class Dingding():
     stone_pi = 'https://oapi.dingtalk.com/robot/send?access_token=d1103bb860b1a984d0bc21b6cd6c4d885914f51b08de6881fd77d8ddb10511ca'
 
 
+class SpiritualFood():
+    root_url = 'http://www.jidujiao.com'
+    url = 'http://www.jidujiao.com/wenkan/lingxiuriliang/'
+    daily_food_url = 'http://www.jidujiao.com/wenkan/lingxiuriliang/meirilingliang/'
+
+
 def mk_dirs(dirs):
     for dir in dirs:
         try:
