@@ -20,6 +20,7 @@ def add_back_schedule_jobs(BackScheduler):
     # 整点提醒功能（每到整点自动报时）
     BackScheduler.add_job(func=music_play.random_play, args=(None, 'commandline', 1, pure_music), trigger='cron',
                           max_instances=10, month='*', day='*', hour='*', minute='00')
+    # 每天早上爬取灵修经文并推送到钉钉
     BackScheduler.add_job(func=daily_scripture, trigger='cron', max_instances=10, month='*', day='*', hour='7',
                           minute='00')
     return
