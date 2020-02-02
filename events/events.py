@@ -1,6 +1,8 @@
-from tools import ip_update, DDingWarn, socket_wait
+from tools import ip_update, DDingWarn, socket_wait, log
 import threading
-import projects
+from Spiders import jdjzww_daily
+
+logger = log.logger
 
 
 def initiator():
@@ -33,4 +35,12 @@ def wait_sig_and_check(func_to_run):
     wait_socket_th.start()
     wait_sig_and_run_th = threading.Thread(target=socket_wait.wait_signal_and_run, args=(func_to_run,), daemon=True)
     wait_sig_and_run_th.start()
+    return
+
+
+def daily_scripture():
+    jdjzww_daily.update_url_list()
+    scripture = jdjzww_daily.get_very_day_scripture()
+    logger.info(f'今天的经文是：{scripture}')
+    DDingWarn.request_ding(result=[str(scripture)])
     return

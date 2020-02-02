@@ -157,7 +157,6 @@ def pi_mplayer(music):
         request_ding(result=[f'音乐播放失败！这首歌是： {music}'])
         return False
 
-
 # def py_game_player(file):
 #     pygame.mixer.init()
 #     print("播报天气")
