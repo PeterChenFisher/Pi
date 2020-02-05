@@ -17,4 +17,4 @@ if [ $? -eq 0 ];then
 else
     echo "kill $PID fail" >> excluded/git_process/ProjAuto.log
 fi
-bash ./main.sh
+./main.sh
