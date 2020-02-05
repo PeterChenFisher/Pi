@@ -42,11 +42,11 @@ def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0, ding
         res = request.urlopen(req)
         res = res.read()
         logger.info(res)
-    except Exception:
+    except Exception as e:
         logger.warning('Connection to Dingding failed,lets try it next time')
         time.sleep(60)
         request_ding_time += 1
         if request_ding_time == 3:
-            logger.warning('Request Dingding a lot times but all failed.')
+            logger.warning(f'Request Dingding a lot times but all failed.{e}')
             return
         request_ding(result, Warning, isAtAll, request_ding_time)
