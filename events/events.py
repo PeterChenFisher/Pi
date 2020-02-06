@@ -39,7 +39,9 @@ def wait_sig_and_check(func_to_run):
 
 
 def daily_scripture():
+    logger.info(f'开始爬取每日经文...')
     jdjzww_daily.update_url_list()
     scripture = jdjzww_daily.get_very_day_scripture()
     DDingWarn.request_ding(result=[str(scripture)])
+    logger.info(f'爬取每日经文结束。')
     return
