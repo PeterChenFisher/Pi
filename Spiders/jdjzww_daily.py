@@ -2,6 +2,7 @@ import datetime
 import requests
 from bs4 import BeautifulSoup
 from config import *
+from tools.log import logger
 
 daily_food_urls = {}
 
@@ -14,12 +15,21 @@ def get_scripture(url):
     return scripture
 
 
-def update_url_list():
+def update_url_list(request_times=0):
     global daily_food_urls
     root_url = SpiritualFood.root_url
     main_url = SpiritualFood.daily_food_url
 
-    resp = requests.request(method='get', url=main_url)
+    try:
+        resp = requests.request(method='get', url=main_url, timeout=30)
+    except Exception as e:
+        request_times += 1
+        logger.info(f"更新列表失败。更新次数：{request_times}")
+        # TODO
+        if request_times >= 10:
+            logger.info(f'请求网站次数达到{request_times}次，放弃请求。')
+        update_url_list(request_times)
+        return
     resp.encoding = 'utf-8'
     soup = BeautifulSoup(resp.text, 'html5lib')
     hot_list = soup.find('div', id='hot-list')
