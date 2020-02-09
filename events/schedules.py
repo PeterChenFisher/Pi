@@ -6,13 +6,13 @@ from .events import *
 def add_block_schedule_jobs(BlockScheduler):
     # 周中早起闹钟音乐
     BlockScheduler.add_job(func=music_play.random_play, args=(None, 'commandline', 10), trigger='cron',
-                           max_instances=10, month='*', day_of_week='mon,tue,wed,thu,fri', hour='7', minute='45')
+                           max_instances=10, month='*', day_of_week='mon,tue,wed,thu,fri', hour='6', minute='30')
     # 周末早起闹钟音乐
     BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 10), trigger='cron',
                            max_instances=10, month='*', day_of_week='sat,sun', hour='8', minute='30')
     # 每天早上爬取灵修经文并推送到钉钉
     BlockScheduler.add_job(func=daily_scripture, trigger='cron', max_instances=10, month='*', day='*', hour='6',
-                           minute='30')
+                           minute='15')
     return
 
 
