@@ -28,6 +28,7 @@ def update_url_list(request_times=0):
         # TODO
         if request_times >= 10:
             logger.info(f'请求网站次数达到{request_times}次，放弃请求。')
+            return
         update_url_list(request_times)
         return
     resp.encoding = 'utf-8'
