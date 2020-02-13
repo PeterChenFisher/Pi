@@ -28,5 +28,6 @@ if __name__ == '__main__':
     # 在调度器上增加任务
     events.schedules.add_block_schedule_jobs(BlockScheduler)
     events.schedules.add_back_schedule_jobs(BackScheduler)
+    # 获取所有的进程任务及时间安排，发送钉钉
     BackScheduler.start()
     BlockScheduler.start()
