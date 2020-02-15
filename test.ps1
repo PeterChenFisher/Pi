@@ -1,1 +1,0 @@
-Write-Host "Hello,$args[0]"

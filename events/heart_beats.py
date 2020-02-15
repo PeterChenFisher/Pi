@@ -28,3 +28,12 @@ def time_reporting():
         else:
             logger.warning(f'Time Reporting Failed.{text_voice[key_message]}')
         return
+
+
+# 网络不正常，无法连接时候，红灯亮起
+def check_wifi():
+    return
+
+# TODO 核对 IP地址是否改变？如果IP地址改变，发送钉钉
+# TODO 如果无法访问外网，红灯亮起/语音播报
+# TODO 记录网络失常时间，把网络失常时间作为报表记录下来

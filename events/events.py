@@ -42,6 +42,7 @@ def daily_scripture():
     logger.info(f'开始爬取每日经文...')
     jdjzww_daily.update_url_list()
     scripture = jdjzww_daily.get_very_day_scripture()
+    logger.info('今日经文请求钉钉！')
     DDingWarn.request_ding(result=[str(scripture)])
     logger.info(f'爬取每日经文结束。')
     return

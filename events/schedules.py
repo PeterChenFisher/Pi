@@ -6,7 +6,7 @@ from .events import *
 def add_block_schedule_jobs(BlockScheduler):
     # 周中早起闹钟音乐
     BlockScheduler.add_job(func=music_play.random_play, args=(None, 'commandline', 10), trigger='cron',
-                           max_instances=10, month='*', day_of_week='mon,tue,wed,thu,fri', hour='7', minute='30')
+                           max_instances=10, month='*', day_of_week='mon,tue,wed,thu,fri', hour='6', minute='30')
     # 周末早起闹钟音乐
     BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 10), trigger='cron',
                            max_instances=10, month='*', day_of_week='sat,sun', hour='8', minute='30')
