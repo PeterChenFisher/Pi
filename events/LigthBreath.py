@@ -7,11 +7,11 @@ GPIO.setup(11, GPIO.OUT)  # 设置物理引脚11负责输出电压
 
 
 def LightBreath(light_code):
-    while True:  # 条件符合，执行以下程序循环
-        GPIO.output(light_code, GPIO.HIGH)  # 输出高电平
-        time.sleep(1)  # 计时0.5秒
-        GPIO.output(light_code, GPIO.LOW)  # 引脚输出低电平
-        time.sleep(1)  # 计时1秒
+    while True:
+        GPIO.output(light_code, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(light_code, GPIO.LOW)
+        time.sleep(1)
 
 
 if __name__ == '__main__':
