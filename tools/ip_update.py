@@ -3,6 +3,7 @@ import socket
 import time
 
 from . import log
+from . import DDingWarn
 
 logger = log.logger
 
@@ -32,7 +33,7 @@ def check_network_status():
         logger.info('NetWork Connected!!!')
         s.close()
         return if_network_on
-    except :
+    except:
         return if_network_on
 
 
@@ -43,3 +44,21 @@ def get_ip_address():
     ipaddr = s.getsockname()[0]
     s.close()
     return ipaddr
+
+
+# IP 监控
+def ip_addr_monitor():
+    global ip_addr
+
+    inner_ip_addr = None
+    while 1:
+        if ip_addr is None or ip_addr != inner_ip_addr:
+            if wait_network_on():
+                ip_addr = get_ip_address()
+                message_result = [
+                    '你的树莓派IP地址是：',
+                    f'    {ip_addr}'
+                ]
+                DDingWarn.request_ding(result=message_result)
+                inner_ip_addr = ip_addr
+        time.sleep(60 * 5)

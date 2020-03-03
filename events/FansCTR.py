@@ -14,14 +14,13 @@ def fans_ctrl():
     while 1:
         now = datetime.datetime.now()
         h = now.hour
-        while 9 < h < 21:
+        if 9 < h < 21:
             GPIO.output(13, GPIO.HIGH)  # 输出高电平
             print('HIGH')
-            time.sleep(60*3)
+            time.sleep(60 * 5)
             GPIO.output(13, GPIO.LOW)  # 输出高电平
             print('LOW')
-            time.sleep(60*5)
-        time.sleep(30)
+            time.sleep(60 * 3)
 
 
 if __name__ == '__main__':
