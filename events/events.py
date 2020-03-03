@@ -1,32 +1,17 @@
+import time
 from tools import ip_update, DDingWarn, socket_wait, log
 import threading
 from Spiders import jdjzww_daily
 
 logger = log.logger
+ip_addr = None
 
 
 def initiator():
     # 程序初始化：初始时候需要启动的线程和任务
-    starting_up()
-    # wait_sig_and_check()
-    return
-
-
-def send_ip_address_to_dding():
-    if ip_update.wait_network_on():
-        ip_addr = ip_update.get_ip_address()
-        message_result = [
-            '你的树莓派IP地址是：',
-            f'    {ip_addr}'
-        ]
-        DDingWarn.request_ding(result=message_result)
-    return
-
-
-def starting_up():
-    ip_addr_report_threading = threading.Thread(target=send_ip_address_to_dding)
-    ip_addr_report_threading.start()
     DDingWarn.request_ding(['你的石头派项目正在启动！'])
+    ip_addr_monitor_th = threading.Thread(target=ip_update.ip_addr_monitor)
+    ip_addr_monitor_th.start()
     return
 
 

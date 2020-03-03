@@ -5,7 +5,7 @@ from . import schedules
 def debug_code(debug):
     if debug:
         from events import events
-        events.send_ip_address_to_dding()
+        events.ip_addr_monitor()
 
         import sys
         sys.exit()
