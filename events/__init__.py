@@ -1,4 +1,4 @@
-from .events import starting_up
+from .events import initiator
 from . import schedules
 
 
