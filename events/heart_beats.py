@@ -4,7 +4,7 @@ from config import *
 from tools.music_play import pi_mplayer
 import time
 import os
-from tools.templates import *
+from tools.reply_template import *
 
 
 def time_reporting():
@@ -34,6 +34,5 @@ def time_reporting():
 def check_wifi():
     return
 
-# TODO 核对 IP地址是否改变？如果IP地址改变，发送钉钉
 # TODO 如果无法访问外网，红灯亮起/语音播报
 # TODO 记录网络失常时间，把网络失常时间作为报表记录下来

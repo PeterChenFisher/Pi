@@ -9,7 +9,7 @@ logger = log.logger
 
 
 # 检查网络连接是否正常
-def wait_network_on():
+def wait_network_on(limit=None):
     logger.info('Checking Network...')
     times = 0
     while True:
@@ -19,6 +19,9 @@ def wait_network_on():
             times += 1
             if times % 20 == 0:
                 logger.info('NetWork Disconnected... ')
+            if limit:
+                if times > limit:
+                    return False
             time.sleep(5)
 
 
@@ -62,3 +65,10 @@ def ip_addr_monitor():
                 DDingWarn.request_ding(result=message_result)
                 inner_ip_addr = ip_addr
         time.sleep(60 * 5)
+
+
+def net_work_monitor():
+    while 1:
+        if not wait_network_on(limit=5):
+            # TODO 点亮一颗LED红灯
+            DDingWarn.request_ding(result=['网络失常'])

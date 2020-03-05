@@ -7,16 +7,7 @@ mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
 
 def test():
-    from events.events import daily_scripture
-    from apscheduler.schedulers.blocking import BlockingScheduler
-    from apscheduler.schedulers.background import BackgroundScheduler
-    bs = BlockingScheduler()
-    bgs = BackgroundScheduler()
-    bgs.add_job(func=daily_scripture, trigger='cron', max_instances=10, month='*', day='*', hour='14', minute='25')
-    bs.add_job(func=daily_scripture, trigger='cron', max_instances=10, month='*', day='*', hour='13', minute='54')
-    bgs.start()
-    bs.start()
-    # daily_scripture()
+    music_play.random_play()
     return
 
 
