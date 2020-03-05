@@ -3,7 +3,7 @@ import requests
 import config
 from tools.log import logger
 from tools import DDingWarn
-from tools.templates import *
+from tools.reply_template import *
 
 
 # 获取调用百度api的token，auth为返回的结果

@@ -2,6 +2,7 @@ import time
 from tools import ip_update, DDingWarn, socket_wait, log
 import threading
 from Spiders import jdjzww_daily
+from config import *
 
 logger = log.logger
 ip_addr = None
@@ -12,6 +13,7 @@ def initiator():
     DDingWarn.request_ding(['你的石头派项目正在启动！'])
     ip_addr_monitor_th = threading.Thread(target=ip_update.ip_addr_monitor)
     ip_addr_monitor_th.start()
+    # gpio_tool.gpio_init()
     return
 
 
