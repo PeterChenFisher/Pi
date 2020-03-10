@@ -89,13 +89,13 @@ def read_cloud_music(music_list_file_location=None):
 def random_play(musics_location=None, method='commandline', times=1, mode=normal_music):
     global local_music_list, pure_music_list, cloud_music_list
 
-    if not local_music_list or pure_music_list:
+    if not local_music_list or pure_music_list or cloud_music_list:
         read_musics(musics_location)
         read_pure_music(musics_location)
         read_cloud_music()
 
     if mode == normal_music:
-        musics = local_music_list + cloud_music_list if check_network_status() else local_music_list
+        musics = (local_music_list + cloud_music_list) if check_network_status() else local_music_list
     elif mode == pure_music:
         musics = pure_music_list
     elif mode == mix_music:
@@ -104,7 +104,6 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
     else:
         request_ding(result=['播放模式设置错误', '请检查代码，重新设置播放模式'])
         return
-    player = pi_mplayer
     i = 0
     while i < times:
         ran_music = musics[random.randint(0, len(musics) - 1)]
