@@ -6,6 +6,7 @@ from . import log
 from . import DDingWarn
 
 logger = log.logger
+ip_addr = None
 
 
 # 检查网络连接是否正常
@@ -17,7 +18,7 @@ def wait_network_on(limit=None):
             return True
         else:
             times += 1
-            if times % 20 == 0:
+            if times % 100 == 0:
                 logger.info('NetWork Disconnected... ')
             if limit:
                 if times > limit:
@@ -40,7 +41,7 @@ def check_network_status():
         return if_network_on
 
 
-# 获得本级制定接口的ip地址
+# 获得本机指定接口的ip地址
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("1.1.1.1", 80))
