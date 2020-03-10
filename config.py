@@ -59,4 +59,4 @@ normal_music = 'NormalMusic'
 pure_music = 'PureMusic'
 mix_music = 'MinMusic'
 
-# mk_dirs([excluded_file, tts_location, time_report_tts_location])
+mk_dirs([excluded_file, tts_location, time_report_tts_location])
