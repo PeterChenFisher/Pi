@@ -1,9 +1,5 @@
 import time
-# import sys
 import random
-# import os
-# import cv2
-# import pygame
 from .log import logger
 from .DDingWarn import request_ding
 from .ip_update import check_network_status
@@ -12,6 +8,8 @@ from config import *
 local_music_list = []
 pure_music_list = []
 cloud_music_list = []
+
+reload_sig = True
 
 
 def read_pure_music(musics_location=None):
@@ -58,7 +56,6 @@ def read_musics(musics_location=None):
 def read_cloud_music(music_list_file_location=None):
     global cloud_music_list
 
-    music_id_list = []
     net_ease_music_mother_linear_chain = 'https://music.163.com/song/media/outer/url?id='
 
     if music_list_file_location is None:
@@ -78,8 +75,7 @@ def read_cloud_music(music_list_file_location=None):
                 music_id = line
                 music_linear_chain = net_ease_music_mother_linear_chain + str(music_id) + '.mp3'
 
-            music_id_list.append(music_linear_chain)
-    cloud_music_list = music_id_list
+            cloud_music_list.append(music_linear_chain)
     logger.info('云音乐链接：')
     for music_link in cloud_music_list:
         logger.info(f' {music_link}')
@@ -87,12 +83,14 @@ def read_cloud_music(music_list_file_location=None):
 
 
 def random_play(musics_location=None, method='commandline', times=1, mode=normal_music):
-    global local_music_list, pure_music_list, cloud_music_list
+    # TODO 处理变量 musics_location
+    global local_music_list, pure_music_list, cloud_music_list, reload_sig
 
-    if not local_music_list or pure_music_list:
-        read_musics(musics_location)
-        read_pure_music(musics_location)
+    if not local_music_list or pure_music_list or not cloud_music_list or reload_sig:
+        read_musics()
+        read_pure_music()
         read_cloud_music()
+        reload_sig = False
 
     if mode == normal_music:
         musics = local_music_list + cloud_music_list if check_network_status() else local_music_list
@@ -104,13 +102,13 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
     else:
         request_ding(result=['播放模式设置错误', '请检查代码，重新设置播放模式'])
         return
-    player = pi_mplayer
     i = 0
     while i < times:
         ran_music = musics[random.randint(0, len(musics) - 1)]
         time.sleep(0.5)
         pi_mplayer(ran_music)
         i += 1
+    logger.info(f'随机音乐播放器播放结束')
 
 
 def pi_mplayer(music):
@@ -128,6 +126,12 @@ def pi_mplayer(music):
     else:
         request_ding(result=[f'音乐播放失败！这首歌是： {music}'])
         return False
+
+# TODO 收到信号，即更新音乐列表
+
+# import os
+# import cv2
+# import pygame
 
 # pygame.mixer.init()
 # pygame.init()
