@@ -1,6 +1,4 @@
 from tools import music_play
-from events import events
-import sys
 from config import *
 
 mk_dirs([excluded_file, tts_location, time_report_tts_location])
