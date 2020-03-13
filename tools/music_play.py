@@ -86,7 +86,7 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
     # TODO 处理变量 musics_location
     global local_music_list, pure_music_list, cloud_music_list, reload_sig
 
-    if not local_music_list or pure_music_list or not cloud_music_list or reload_sig:
+    if not local_music_list or not pure_music_list or not cloud_music_list or reload_sig:
         read_musics()
         read_pure_music()
         read_cloud_music()
@@ -109,6 +109,11 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
         pi_mplayer(ran_music)
         i += 1
     logger.info(f'随机音乐播放器播放结束')
+
+
+def reload_sig_state_switch():
+    global reload_sig
+    reload_sig = True
 
 
 def pi_mplayer(music):
