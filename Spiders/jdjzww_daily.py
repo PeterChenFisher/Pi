@@ -10,7 +10,8 @@ daily_food_urls = {}
 def get_scripture(url):
     resp = requests.request(method='get', url=url)
     resp.encoding = 'utf-8'
-    soup = BeautifulSoup(resp.text, 'html5lib')
+    # soup = BeautifulSoup(resp.text, 'html5lib')
+    soup = BeautifulSoup(resp.text)
     scripture = soup.find('div', class_='texts').p.next
     return scripture
 
@@ -25,7 +26,7 @@ def update_url_list(request_times=0):
         resp = requests.request(method='get', url=main_url, timeout=30)
     except Exception as e:
         request_times += 1
-        logger.info(f"更新列表失败。更新次数：{request_times}")
+        logger.info(f"更新列表失败。更新次数：{request_times} err[{e}]")
         if request_times >= 10:
             logger.info(f'请求网站次数达到{request_times}次，放弃请求。')
             return
