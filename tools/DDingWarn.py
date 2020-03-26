@@ -7,11 +7,12 @@ import json
 
 def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0, ding_url=None):
     if type(result) != list:
-        result = ['告警信息格式错误了！应该发送一个错误信息列表过来~']
-    result.append('\n    来自石头派的问候！愿你平安！')
+        result = ['告警信息格式错误了！请发送一个错误信息列表过来~']
+    # result.append('\n    来自石头派的问候！愿你平安！')
     content = ('\n'.join(result)) if result != '' else ''
+    content += '\n\n    来自石头派的问候！愿你平安！'
     if content == '':
-        logger.info('Empty message.')
+        logger.info('空信息。')
         return
     if not ding_url:
         ding_url = config.Dingding.stone_pi
@@ -43,10 +44,10 @@ def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0, ding
         res = res.read()
         logger.info(res)
     except Exception as e:
-        logger.warning('Connection to Dingding failed,lets try it next time')
+        logger.warning(f'连接钉钉失败:第{request_ding_time}次。')
         time.sleep(60)
         request_ding_time += 1
         if request_ding_time == 3:
-            logger.warning(f'Request Dingding a lot times but all failed.{e}')
+            logger.warning(f'连接钉钉失败{request_ding_time}次。停止重试。{e}')
             return
         request_ding(result, Warning, isAtAll, request_ding_time)

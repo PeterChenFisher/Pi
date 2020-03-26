@@ -5,7 +5,8 @@ mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
 
 def test():
-    music_play.random_play()
+    from tools.DDingWarn import request_ding
+    request_ding(['hello!'])
     return
 
 
