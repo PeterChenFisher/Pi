@@ -1,7 +1,6 @@
 import time
 from tools import music_play
 from config import *
-from events import FansCTR
 from tools import log
 import threading
 
@@ -14,24 +13,14 @@ record_temp;
 fans_ctr;
 '''
 
-
-def test_func2():
-    test_th = threading.Thread(target=test_func1())
-    test_th.start()
-    return
-
-
-def test_func1():
-    while 1:
-        time.sleep(20)
-        print(111)
+if os_platform == 'linux' or os_platform == 'Linux':
+    from events import FansCTR
 
 
 def test_condition():
-    te_th = threading.Thread(target=test_func2)
-    te_th.start()
-    time.sleep(100)
-
+    import events
+    events.events.initiator()
+    print('after-ini')
     return
 
 
@@ -47,9 +36,11 @@ def executer():
         times = int(args[3]) if len(args) >= 4 else 50
         music_play.random_play(method='commandline', times=times, mode=arg2)
     elif arg1 == 'record_temp':
-        FansCTR.record_temp()
+        if os_platform == 'linux' or os_platform == 'Linux':
+            FansCTR.record_temp()
     elif arg1 == 'fans_ctr':
-        FansCTR.fans_ctrl()
+        if os_platform == 'linux' or os_platform == 'Linux':
+            FansCTR.fans_ctrl()
 
 
 if __name__ == '__main__':
