@@ -1,9 +1,6 @@
-import time
 from tools import ip_update, DDingWarn, socket_wait, log, music_play
 import threading
 from . import LightBreath
-from Spiders import jdjzww_daily
-from config import *
 
 logger = log.logger
 ip_addr = None
@@ -19,10 +16,11 @@ def initiator():
     ip_addr_monitor_th = threading.Thread(target=ip_update.ip_addr_monitor)
     ip_addr_monitor_th.start()
 
-    light_breath_th = threading.Thread(target=LightBreath.LightBreath(light_code=11))
+    light_breath_th = threading.Thread(target=LightBreath.LightBreath, args=(11,))
     light_breath_th.start()
 
-    wait_socket_th = threading.Thread(target=socket_wait.socket_wait, args=(events_to_run,), daemon=True)
+    wait_socket_th = threading.Thread(target=socket_wait.socket_wait, args=(events_to_run,))
     wait_socket_th.start()
-    wait_sig_and_run_th = threading.Thread(target=socket_wait.wait_signal_and_run, args=(events_to_run,), daemon=True)
+    wait_sig_and_run_th = threading.Thread(target=socket_wait.wait_signal_and_run, args=(events_to_run,))
     wait_sig_and_run_th.start()
+    logger.info('after threadings')

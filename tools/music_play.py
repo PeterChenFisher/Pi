@@ -131,8 +131,6 @@ def pi_mplayer(music):
         request_ding(result=[f'音乐播放失败！这首歌是： {music}'])
         return False
 
-# TODO 收到信号，即更新音乐列表
-
 # import os
 # import cv2
 # import pygame
