@@ -1,7 +1,7 @@
 import time
 from tools import music_play
 from config import *
-# from events import FansCTR
+from events import FansCTR
 from tools import log
 import threading
 
@@ -46,10 +46,10 @@ def executer():
         arg2 = args[2] if len(args) >= 3 else normal_music
         times = int(args[3]) if len(args) >= 4 else 50
         music_play.random_play(method='commandline', times=times, mode=arg2)
-    # elif arg1 == 'record_temp':
-    #     FansCTR.record_temp()
-    # elif arg1 == 'fans_ctr':
-    #     FansCTR.fans_ctrl()
+    elif arg1 == 'record_temp':
+        FansCTR.record_temp()
+    elif arg1 == 'fans_ctr':
+        FansCTR.fans_ctrl()
 
 
 if __name__ == '__main__':
