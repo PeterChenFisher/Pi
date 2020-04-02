@@ -7,6 +7,8 @@ pure_musics_location = None
 local_music_location = None
 cloud_music_location = None
 
+raspi_temp_result_file = './raspi-temp-record.txt'
+
 
 def mk_dirs(dirs):
     for dir in dirs:
@@ -53,10 +55,12 @@ log_path = os.path.join(excluded_file, 'log')
 tts_location = os.path.join(excluded_file, 'tts')
 time_report_tts_location = os.path.join(tts_location, 'time_report')
 
+assistant_log_path = os.path.join(excluded_file, 'assistant-log')
+
 heart_beat_text2 = '早点睡觉！晚安！'
 
-normal_music = 'NormalMusic'
-pure_music = 'PureMusic'
-mix_music = 'MinMusic'
+normal_music = 'normal_player'
+pure_music = 'pure_player'
+mix_music = 'mix_player'
 
 mk_dirs([excluded_file, tts_location, time_report_tts_location])
