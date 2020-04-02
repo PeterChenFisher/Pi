@@ -1,6 +1,7 @@
 from tools import music_play, DDingWarn
 from config import *
 from .events import *
+from Spiders import jdjzww_daily
 
 
 def add_block_schedule_jobs(BlockScheduler):
@@ -11,8 +12,8 @@ def add_block_schedule_jobs(BlockScheduler):
     BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 10), trigger='cron',
                            max_instances=10, month='*', day_of_week='sat,sun', hour='8', minute='30')
     # 每天早上爬取灵修经文并推送到钉钉
-    BlockScheduler.add_job(func=daily_scripture, trigger='cron', max_instances=10, month='*', day='*', hour='6',
-                           minute='15')
+    BlockScheduler.add_job(func=jdjzww_daily.daily_scripture, trigger='cron', max_instances=10, month='*', day='*',
+                           hour='6', minute='15')
     return
 
 

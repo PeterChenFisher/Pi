@@ -1,25 +1,60 @@
+import time
 from tools import music_play
 from config import *
+# from events import FansCTR
+from tools import log
+import threading
 
 mk_dirs([excluded_file, tts_location, time_report_tts_location])
+manual = '''
+tips;
+player; mix_player/normal_player/mix_player; times;
+test;
+record_temp;
+fans_ctr;
+'''
 
 
-def test():
-    from tools.DDingWarn import request_ding
-    request_ding(['hello!'])
+def test_func2():
+    test_th = threading.Thread(target=test_func1())
+    test_th.start()
     return
 
 
+def test_func1():
+    while 1:
+        time.sleep(20)
+        print(111)
+
+
+def test_condition():
+    te_th = threading.Thread(target=test_func2)
+    te_th.start()
+    time.sleep(100)
+
+    return
+
+
+def executer():
+    global manual
+    args = sys.argv
+    logger.info('Receive args:' + ' - '.join(args))
+    arg1 = args[1]
+    if arg1 == 'tips':
+        logger.info(manual)
+    elif arg1 == 'player':
+        arg2 = args[2] if len(args) >= 3 else normal_music
+        times = int(args[3]) if len(args) >= 4 else 50
+        music_play.random_play(method='commandline', times=times, mode=arg2)
+    # elif arg1 == 'record_temp':
+    #     FansCTR.record_temp()
+    # elif arg1 == 'fans_ctr':
+    #     FansCTR.fans_ctrl()
+
+
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        test()
+    logger = log.logger_generator(log_path=assistant_log_path, logger_name='Assistant')
+    if len(sys.argv) == 1:
+        test_condition()
     else:
-        arg = sys.argv[1]
-        if arg == 'player':
-            music_play.random_play(method='commandline', times=50)
-        elif arg == 'pure_player':
-            music_play.random_play(method='commandline', times=50, mode=pure_music)
-        elif arg == 'mix_player':
-            music_play.random_play(method='commandline', times=50, mode=mix_music)
-        elif arg == 'test':
-            test()
+        executer()
