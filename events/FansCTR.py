@@ -41,7 +41,7 @@ def record_temp():
             fo.write(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
             fo.write(str(temp))
             fo.write('\n')
-            time.sleep(10)
+            time.sleep(60)
 
 
 if __name__ == '__main__':
