@@ -23,4 +23,3 @@ def initiator():
     wait_socket_th.start()
     wait_sig_and_run_th = threading.Thread(target=socket_wait.wait_signal_and_run, args=(events_to_run,))
     wait_sig_and_run_th.start()
-    logger.info('after threadings')
