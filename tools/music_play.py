@@ -102,8 +102,7 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
     else:
         request_ding(result=['播放模式设置错误', '请检查代码，重新设置播放模式'])
         return
-    i = 0
-    for i in range(0, i):
+    for i in range(0, times):
         ran_music = musics[random.randint(0, len(musics) - 1)]
         time.sleep(0.5)
         pi_mplayer(ran_music)
