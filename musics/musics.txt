@@ -25,3 +25,5 @@ http://music.163.com/song?id=510049381&userid=129882220
 http://music.163.com/song?id=20707713&userid=129882220
 # 10000 Reasons
 http://music.163.com/song?id=17258493&userid=129882220
+# What a Friend We Have in Jesus.
+http://music.163.com/song?id=29715597&userid=129882220
