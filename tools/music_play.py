@@ -76,6 +76,7 @@ def read_cloud_music(music_list_file_location=None):
                 music_linear_chain = net_ease_music_mother_linear_chain + str(music_id) + '.mp3'
 
             cloud_music_list.append(music_linear_chain)
+
     logger.info('云音乐链接：')
     for music_link in cloud_music_list:
         logger.info(f' {music_link}')
