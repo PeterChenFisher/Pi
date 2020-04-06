@@ -1,7 +1,6 @@
 import time
-from tools import music_play
+from tools import music_play, log, socket_post
 from config import *
-from tools import log
 import threading
 
 mk_dirs([excluded_file, tts_location, time_report_tts_location])
@@ -18,9 +17,7 @@ if os_platform == 'linux' or os_platform == 'Linux':
 
 
 def test_condition():
-    import events
-    events.events.initiator()
-    print('after-ini')
+    socket_post.socket_post(HOST='192.168.1.100', PORT=65432)
     return
 
 
