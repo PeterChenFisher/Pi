@@ -27,3 +27,13 @@ http://music.163.com/song?id=20707713&userid=129882220
 http://music.163.com/song?id=17258493&userid=129882220
 # What a Friend We Have in Jesus.
 http://music.163.com/song?id=29715597&userid=129882220
+# In Christ Along
+http://music.163.com/song?id=26366794&userid=129882220
+# 一生所爱
+http://music.163.com/song?id=32785700&userid=129882220
+# Until You
+http://music.163.com/song?id=19081573&userid=129882220
+# My Prayer
+http://music.163.com/song?id=2485441&userid=129882220
+# What a Beautiful name
+http://music.163.com/song?id=511380700&userid=129882220
