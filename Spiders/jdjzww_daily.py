@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from config import *
 from tools.log import logger
-from tools import DDingWarn
+from tools import DDingWarn, ServerChanWarn
 
 daily_food_urls = {}
 
@@ -75,5 +75,6 @@ def daily_scripture():
     scripture = get_very_day_scripture()
     logger.info('今日经文请求钉钉！')
     DDingWarn.request_ding(result=[str(scripture)])
+    ServerChanWarn.server_chan_post(title='今日经文', content=str(scripture))
     logger.info(f'爬取每日经文结束。')
     return
