@@ -6,10 +6,6 @@ from tools import log
 import events
 from config import *
 
-# 测试代码
-debug = False
-events.debug_code(debug)
-
 if __name__ == '__main__':
     # 程序启动初始化
     logger = log.logger
