@@ -1,1 +1,1 @@
-from . import FansCTR, heart_beats, Oclock, LightBreath, record_pi_cpu_temp, schedules
+from . import heart_beats, Oclock, LightBreath, record_pi_cpu_temp, schedules

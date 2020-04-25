@@ -1,6 +1,6 @@
-from Spiders import jdjzww_daily
-from tools import ip_update, DDingWarn, socket_wait, log, music_play
+from tools import ip_update, socket_wait, log, music_play
 from .Oclock import weekday_morning_oclock
+from .Bibles import *
 import threading
 from . import LightBreath
 
@@ -35,7 +35,7 @@ def add_block_schedule_jobs(BlockScheduler):
     BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 10), trigger='cron',
                            max_instances=10, month='*', day_of_week='sat,sun', hour='8', minute='30')
     # 每天早上爬取灵修经文并推送到钉钉
-    BlockScheduler.add_job(func=jdjzww_daily.daily_scripture, trigger='cron', max_instances=10, month='*', day='*',
+    BlockScheduler.add_job(func=daily_scripture, trigger='cron', max_instances=10, month='*', day='*',
                            hour='6', minute='15')
     return
 
