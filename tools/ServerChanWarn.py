@@ -19,4 +19,4 @@ def server_chan_post(title='空标题', content='空内容'):
         return reply_template.template(message='推送到Server酱失败。请检查网络连接。')
     resp.encoding = 'utf-8'
     logger.info(f'推送到Server酱结果：{resp.text}')
-    return reply_template.template(success=True)
+    return reply_template.template(success=True, data=f'{resp.text}', message=f'{resp.text}')
