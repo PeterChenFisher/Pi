@@ -16,7 +16,7 @@ if __name__ == '__main__':
     mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
     # 从启动器启动任务/进行初始化
-    events.events.initiator()
+    events.schedules.initiator()
 
     # 初始化任务调度器
     BlockScheduler = BlockingScheduler()
