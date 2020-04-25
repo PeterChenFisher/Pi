@@ -3,7 +3,7 @@ import time
 
 import RPi.GPIO as GPIO
 
-from config import *
+# from config import *
 
 
 def get_pi_cpu_temp():
@@ -34,15 +34,15 @@ def fans_ctrl():
             time.sleep(60 * 5)
 
 
-def record_temp():
-    with open(raspi_temp_result_file, 'w+') as fo:
-        while True:
-            temp = get_pi_cpu_temp()
-            fo.write(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
-            fo.write(str(temp))
-            fo.write('\n')
-            time.sleep(60)
-
+# def record_temp():
+#     with open(raspi_temp_result_file, 'w+') as fo:
+#         while True:
+#             temp = get_pi_cpu_temp()
+#             fo.write(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+#             fo.write(str(temp))
+#             fo.write('\n')
+#             time.sleep(60)
+#
 
 if __name__ == '__main__':
     fans_ctrl()
