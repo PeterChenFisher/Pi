@@ -1,122 +1,93 @@
 import time
+import json
 import random
 from .log import logger
 from .DDingWarn import request_ding
 from .ip_update import check_network_status
 from config import *
 
-local_music_list = []
-pure_music_list = []
-cloud_music_list = []
+local_musics = {}
+pure_musics = {}
+cloud_musics = {}
 
 reload_sig = True
 
 
 def read_pure_music(musics_location=None):
-    global pure_music_list
+    global pure_musics
 
     if not musics_location:
-        musics_location = pure_musics_location
+        musics_location = pure_musics_file_location
 
-    if not pure_music_list:
-        musics = os.listdir(musics_location)
-        pure_music_list = [os.path.join(musics_location, i).replace(' ', '\ ') for i in musics if
-                           i.endswith(('.mp3', 'm4a'))]
-        logger.info('纯音乐列表 :')
-        for music_location in pure_music_list:
-            logger.info(str(music_location))
-    return
+    if not pure_musics:
+        with open(musics_location, 'r+', encoding='utf-8') as fo:
+            pure_musics = json.load(fp=fo)
+    logger.info('纯音乐列表：')
+    for key, value in pure_musics.items():
+        logger.info(f'    {key}:{value}')
 
 
-def read_pure_music_json_file(file_location=None):
-    global pure_music_list
+def read_cloud_music(musics_location=None):
+    global cloud_musics
 
-    if not file_location:
-        file_location = pure_musics_file_location
-    with open(file_location, 'r+') as fo:
-        fo.readlines()
-    return
+    if not musics_location:
+        musics_location = cloud_music_file_location
+
+    with open(musics_location, 'r+', encoding='utf-8') as fo:
+        cloud_musics = json.load(fp=fo)
+    logger.info('云音乐链接：')
+    for music, music_link in cloud_musics.items():
+        logger.info(f'    {music}:{music_link}')
+    return cloud_musics
 
 
 def read_musics(musics_location=None):
-    global local_music_list
+    global local_musics
 
     if not musics_location:
-        os_platform = sys.platform
-        if os_platform == 'linux' or os_platform == 'Linux':
-            musics_location = 'musics'
-        elif os_platform == 'win32':
-            musics_location = 'musics'
-        else:
-            logger.warning('System Estimate Failed.Exit.')
-            return 'System error'
-
-    if not local_music_list:
+        musics_location = local_music_location
+    if not local_musics:
         musics = os.listdir(musics_location)
-        music_locations = [os.path.join(musics_location, i).replace(' ', '\ ') for i in musics if
-                           i.endswith(('.mp3', 'm4a'))]
+        local_musics = {i: os.path.join(musics_location, i).replace(' ', '\ ') for i in musics if
+                        i.endswith(('.mp3', 'm4a'))}
         logger.info('本地音乐：')
-        for music_location in music_locations:
-            logger.info(f' {music_location}')
-        local_music_list = music_locations
-
-    return
-
-
-def read_cloud_music(music_list_file_location=None):
-    global cloud_music_list
-
-    net_ease_music_mother_linear_chain = 'https://music.163.com/song/media/outer/url?id='
-
-    if music_list_file_location is None:
-        music_list_file_location = cloud_music_location
-
-    with open(music_list_file_location, 'r', encoding='utf-8') as music_list_file:
-        lines = music_list_file.readlines()
-        for line in lines:
-            if '#' in line or line == '\n':
-                continue
-            if line.startswith('http://music.163.com/'):
-                music_id = line.split('id=')[1].split('&')[0]
-                music_linear_chain = net_ease_music_mother_linear_chain + str(music_id) + '.mp3'
-            elif line.startswith('OriginalChain'):
-                music_linear_chain = line.split(':')[1]
-            else:
-                music_id = line
-                music_linear_chain = net_ease_music_mother_linear_chain + str(music_id) + '.mp3'
-
-            cloud_music_list.append(music_linear_chain)
-
-    logger.info('云音乐链接：')
-    for music_link in cloud_music_list:
-        logger.info(f' {music_link}')
-    return cloud_music_list
+        for music, music_location in local_musics.items():
+            logger.info(f'    {music}:{music_location}')
 
 
 def random_play(musics_location=None, method='commandline', times=1, mode=normal_music):
     # TODO 处理变量 musics_location
-    global local_music_list, pure_music_list, cloud_music_list, reload_sig
+    global local_musics, pure_musics, cloud_musics, reload_sig
+    musics = {}
 
-    if not local_music_list or not pure_music_list or not cloud_music_list or reload_sig:
+    if not local_musics or not pure_musics or not cloud_musics or reload_sig:
         read_musics()
         read_pure_music()
         read_cloud_music()
         reload_sig = False
 
     if mode == normal_music:
-        musics = local_music_list + cloud_music_list if check_network_status() else local_music_list
-    elif mode == pure_music:
-        musics = pure_music_list
+        musics.update(local_musics)
+        if check_network_status(): musics.update(cloud_musics)
+        # musics = local_musics + cloud_musics if check_network_status() else local_musics
+    elif mode == pure_musics:
+        musics = pure_musics
     elif mode == mix_music:
-        musics = (pure_music_list + local_music_list + cloud_music_list) if check_network_status() else (
-                pure_music_list + local_music_list)
+        musics.update(local_musics)
+        if check_network_status():
+            musics.update(pure_musics)
+            musics.update(cloud_musics)
+        # musics = (pure_musics + local_musics + cloud_musics) if check_network_status() else (
+        #         pure_musics + local_musics)
     else:
         request_ding(result=['播放模式设置错误', '请检查代码，重新设置播放模式'])
         return
     for i in range(0, times):
-        ran_music = musics[random.randint(0, len(musics) - 1)]
+        music_names = list(musics.keys())
+        ran_music = music_names[random.randint(0, len(musics) - 1)]
+        logger.info(f'获取到的随机音乐：{ran_music}')
         time.sleep(0.5)
-        pi_mplayer(ran_music)
+        pi_mplayer(musics[ran_music])
     logger.info(f'随机音乐播放器播放结束')
 
 

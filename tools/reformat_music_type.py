@@ -1,12 +1,23 @@
-# import json
-# from config import *
-#
-# pure_music_list_file = Muscis.pure_musics_file_location
 import json
+from config import *
+import config
 
 pure_music_list_file = '../musics/PureMusics.json'
 
 net_ease_music_mother_linear_chain = 'https://music.163.com/song/media/outer/url?id='
+
+
+def reformat_cloud_musics():
+    music_location = origin_cloud_music_file_location
+    with open(music_location, 'r+', encoding='utf-8')as fo:
+        lines = fo.readlines()
+    cloud_musics = {}
+    for line in lines:
+        cloud_musics[line.split('--')[0]] = net_ease_music_mother_linear_chain + \
+                                            line.split('--')[1].split('id=')[1].split('&')[0]
+
+    with open(config.cloud_music_file_location, 'w+', encoding='utf-8') as fo:
+        json.dump(cloud_musics, fo, indent='  ', ensure_ascii=False)
 
 
 def reformat_pure_musics():
@@ -24,22 +35,5 @@ def reformat_pure_musics():
     return
 
 
-def reformat_cloud_musics():
-    with open('../musics/CloudMusics.txt', 'r+', encoding='utf-8')as fo:
-        title = fo.readline()
-        lines = fo.readlines()
-        # length = int(len(lines) / 2)
-        # # music_couple = [[lines.pop(0), lines.pop(0)] for i in range(0, length)]
-        music_couple = [[lines.pop(0), lines.pop(0)] for i in range(0, int(len(lines) / 2))]
-        cloud_musics = {}
-        for couple in music_couple:
-            id = couple[1].split('id=')[1].split('&')[0]
-            cloud_musics[couple[0].replace('# ', '')] = net_ease_music_mother_linear_chain + id
-    with open('../musics/CloudMuiscs.json', 'w+', encoding='utf-8') as fo:
-        json.dump(cloud_musics, fo, indent='  ', ensure_ascii=False)
-    print(music_couple)
-    print(cloud_musics)
-
-
 # reformat_pure_musics()
-reformat_cloud_musics()
+# reformat_cloud_musics()
