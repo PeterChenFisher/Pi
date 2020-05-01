@@ -1,5 +1,5 @@
 import time
-from tools import music_play, log, socket_post, Text2Speech
+from tools import music_play, log, socket_post, Text2Speech, reformat_music_type
 from config import *
 import threading
 
@@ -17,8 +17,11 @@ if os_platform == 'linux' or os_platform == 'Linux':
 
 
 def test_condition():
-    # socket_post.socket_post(HOST='192.168.1.100', PORT=65432)
-    Text2Speech.text2speech(text='该起床了！现在是早上七点！')
+    # music_play.read_pure_music()
+    # music_play.read_musics()
+    # reformat_music_type.reformat_cloud_musics()
+    music_play.random_play(times=3)
+    # music_play.read_cloud_music()
     return
 
 
