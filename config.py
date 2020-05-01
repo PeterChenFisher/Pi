@@ -1,6 +1,8 @@
 import os
 import sys
 
+os_platform = sys.platform
+
 
 def mk_dirs(dirs):
     for dir in dirs:
@@ -9,21 +11,6 @@ def mk_dirs(dirs):
                 os.mkdir(dir)
         except:
             continue
-
-
-def init_music_location():
-    global pure_musics_location, local_music_location, cloud_music_location, os_platform, pure_musics_file_location
-
-    if os_platform == 'linux' or os_platform == 'Linux':
-        pure_musics_location = 'musics/PureMusics'
-        local_music_location = 'musics'
-        cloud_music_location = 'musics/CloudMusics.txt'
-        pure_musics_file_location = './musics/PureMusics.json'
-    elif os_platform == 'win32':
-        pure_musics_location = 'musics\\PureMusics'
-        local_music_location = 'musics'
-        cloud_music_location = 'musics\\CloudMusics.txt'
-        pure_musics_file_location = '.\\musics\\PureMusics.json'
 
 
 # 钉钉链接
@@ -43,28 +30,20 @@ class SpiritualFood():
     daily_food_url = 'http://www.jidujiao.com/wenkan/lingxiuriliang/meirilingliang/'
 
 
-class Muscis():
-    normal_music = 'normal_player'
-    pure_music = 'pure_player'
-    mix_music = 'mix_player'
+if os_platform == 'linux' or os_platform == 'Linux':
+    local_music_location = 'musics'
+    cloud_music_file_location = 'musics/CloudMusics.json'
+    pure_musics_file_location = './musics/PureMusics.json'
+    origin_cloud_music_file_location = 'musics/CloudMusics.txt'
+elif os_platform == 'win32':
+    local_music_location = 'musics'
+    cloud_music_file_location = 'musics\\CloudMusics.json'
+    pure_musics_file_location = 'musics\\PureMusics.json'
+    origin_cloud_music_file_location = 'musics\\CloudMusics.txt'
 
-    pure_musics_location = None
-    local_music_location = None
-    cloud_music_location = None
-    pure_musics_file_location = None
-
-    def __init__(self):
-        if os_platform == 'linux' or os_platform == 'Linux':
-            pure_musics_location = 'musics/PureMusics'
-            local_music_location = 'musics'
-            cloud_music_location = 'musics/CloudMusics.txt'
-            pure_musics_file_location = './musics/PureMusics.json'
-        elif os_platform == 'win32':
-            pure_musics_location = 'musics\\PureMusics'
-            local_music_location = 'musics'
-            cloud_music_location = 'musics\\CloudMusics.txt'
-            pure_musics_file_location = 'musics\\PureMusics.json'
-
+normal_music = 'normal_player'
+pure_musics = 'pure_player'
+mix_music = 'mix_player'
 
 excluded_file = 'excluded'
 excluded_file = os.path.abspath(excluded_file)
@@ -76,17 +55,7 @@ assistant_log_path = os.path.join(excluded_file, 'assistant-log')
 
 heart_beat_text2 = '早点睡觉！晚安！'
 
-normal_music = 'normal_player'
-pure_music = 'pure_player'
-mix_music = 'mix_player'
-os_platform = sys.platform
-
-pure_musics_location = None
-local_music_location = None
-cloud_music_location = None
-pure_musics_file_location = None
-
 raspi_temp_result_file = './raspi-temp-record.txt'
 
 mk_dirs([excluded_file, tts_location, time_report_tts_location, assistant_log_path])
-init_music_location()
+# init_music_location()
