@@ -28,6 +28,16 @@ def read_pure_music(musics_location=None):
     return
 
 
+def read_pure_music_json_file(file_location=None):
+    global pure_music_list
+
+    if not file_location:
+        file_location = pure_musics_file_location
+    with open(file_location, 'r+') as fo:
+        fo.readlines()
+    return
+
+
 def read_musics(musics_location=None):
     global local_music_list
 
