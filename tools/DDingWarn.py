@@ -6,6 +6,7 @@ import json
 
 logger = log.logger
 
+
 def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0, ding_url=None):
     if type(result) != list:
         result = ['告警信息格式错误了！请发送一个错误信息列表过来~']
