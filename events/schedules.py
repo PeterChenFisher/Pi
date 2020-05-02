@@ -1,6 +1,6 @@
-from tools import ip_update, socket_wait, log, music_play
+from tools import ip_update, socket_wait, music_play
 from .Oclock import weekday_morning_oclock
-from .Bibles import *
+from events.Bibles import *
 import threading
 from . import LightBreath
 
