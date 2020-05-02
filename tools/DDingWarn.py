@@ -1,9 +1,10 @@
 import config
 import time
 from urllib import request
-from .log import logger
+from . import log
 import json
 
+logger = log.logger
 
 def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0, ding_url=None):
     if type(result) != list:

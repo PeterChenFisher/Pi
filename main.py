@@ -3,6 +3,7 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
 from tools import log
+log.set_logger(mode='PeterPi')
 import events
 from config import *
 

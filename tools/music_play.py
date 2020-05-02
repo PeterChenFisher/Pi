@@ -55,7 +55,7 @@ def read_local_musics(musics_location=None):
             logger.info(f'    {music}:{music_location}')
 
 
-def random_play(musics_location=None, method='commandline', times=1, mode=normal_music):
+def random_play(musics_location=None, method='commandline', times=1, mode=normal_music_mode):
     # TODO 处理变量 musics_location
     global local_musics, pure_musics, cloud_musics, reload_sig
     musics = {}
@@ -66,13 +66,13 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
         read_cloud_music()
         reload_sig = False
 
-    if mode == normal_music:
+    if mode == normal_music_mode:
         musics.update(local_musics)
         if check_network_status(): musics.update(cloud_musics)
         # musics = local_musics + cloud_musics if check_network_status() else local_musics
-    elif mode == pure_musics:
+    elif mode == pure_musics_mode:
         musics = pure_musics
-    elif mode == mix_music:
+    elif mode == mix_music_mode:
         musics.update(local_musics)
         if check_network_status():
             musics.update(pure_musics)
@@ -102,7 +102,7 @@ def pi_mplayer(music):
     stt = time.time()
     result = os.system(commandline)
     time_interval = time.time() - stt
-    if time_interval < 60:
+    if time_interval < 5:
         request_ding(result=['音乐播放时常不正常'])
 
     if result == 0:

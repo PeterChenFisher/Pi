@@ -8,3 +8,4 @@ echo '开始执行main.py 脚本'
 python3 /home/pi/Projects/Pi/main.py &
 echo '开始执行 树莓派风扇控制 脚本'
 python3 /home/pi/Projects/Pi/events/FansCTR.py &
+echo '开始执行 每日经文 脚本'

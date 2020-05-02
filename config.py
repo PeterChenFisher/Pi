@@ -30,6 +30,18 @@ class SpiritualFood():
     daily_food_url = 'http://www.jidujiao.com/wenkan/lingxiuriliang/meirilingliang/'
 
 
+class Mode():
+    Default = 'PeterPi'
+    Assistant = 'Assistant'
+    DailyScripture = 'DailyScaipture'
+
+    excluded_file = 'excluded'
+    excluded_file = os.path.abspath(excluded_file)
+    default_log_path = os.path.join(excluded_file, 'log')
+    assistant_log_path = os.path.join(excluded_file, 'assistant-log')
+    daily_scripture_log_path = os.path.join(excluded_file, 'DailyScripture-log')
+
+
 if os_platform == 'linux' or os_platform == 'Linux':
     local_music_location = 'musics'
     cloud_music_file_location = 'musics/CloudMusics.json'
@@ -41,13 +53,13 @@ elif os_platform == 'win32':
     pure_musics_file_location = 'musics\\PureMusics.json'
     origin_cloud_music_file_location = 'musics\\CloudMusics.txt'
 
-normal_music = 'normal_player'
-pure_musics = 'pure_player'
-mix_music = 'mix_player'
+normal_music_mode = 'normal_player'
+pure_musics_mode = 'pure_player'
+mix_music_mode = 'mix_player'
 
 excluded_file = 'excluded'
 excluded_file = os.path.abspath(excluded_file)
-log_path = os.path.join(excluded_file, 'log')
+default_log_path = os.path.join(excluded_file, 'log')
 tts_location = os.path.join(excluded_file, 'tts')
 time_report_tts_location = os.path.join(tts_location, 'time_report')
 
