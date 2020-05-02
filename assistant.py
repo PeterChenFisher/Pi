@@ -1,5 +1,6 @@
 import time
 from tools import music_play, log, socket_post, Text2Speech, reformat_music_type
+from events import Bibles, Oclock
 from config import *
 import threading
 
@@ -20,8 +21,9 @@ def test_condition():
     # music_play.read_pure_music()
     # music_play.read_musics()
     # reformat_music_type.reformat_cloud_musics()
-    music_play.random_play(times=3)
+    # music_play.random_play(times=3)
     # music_play.read_cloud_music()
+    Oclock.weekday_morning_oclock()
     return
 
 
@@ -42,6 +44,8 @@ def executer():
     elif arg1 == 'fans_ctr':
         if os_platform == 'linux' or os_platform == 'Linux':
             FansCTR.fans_ctrl()
+    elif arg1 == 'daily_scriputre':
+        Bibles.daily_scripture()
 
 
 if __name__ == '__main__':

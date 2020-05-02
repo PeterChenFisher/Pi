@@ -41,7 +41,7 @@ def read_cloud_music(musics_location=None):
     return cloud_musics
 
 
-def read_musics(musics_location=None):
+def read_local_musics(musics_location=None):
     global local_musics
 
     if not musics_location:
@@ -61,7 +61,7 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
     musics = {}
 
     if not local_musics or not pure_musics or not cloud_musics or reload_sig:
-        read_musics()
+        read_local_musics()
         read_pure_music()
         read_cloud_music()
         reload_sig = False

@@ -15,3 +15,7 @@ def daily_scripture():
     DDingWarn.request_ding(result=[str(scripture), f'{result[key_message]}'])
     logger.info(f'爬取每日经文结束。')
     return
+
+
+if __name__ == '__main__':
+    daily_scripture()
