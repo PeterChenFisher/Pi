@@ -9,7 +9,7 @@ def weekday_morning_oclock():
         music_play.random_play()
         now = time.localtime()
         hour, minute = now[3], now[4]
-        # if 0 <= minute < 25 or 50 <= minute:
-        heart_beats.time_reporting()
+        if hour == 7:
+            heart_beats.time_reporting()
 
     return
