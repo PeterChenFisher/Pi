@@ -21,7 +21,7 @@ def time_reporting():
     else:
         text_voice = text2speech(text, file_name=file_name)
         if text_voice[key_success]:
-            file_name = text_voice[key_message]
+            file_name = text_voice[key_data]
             pi_mplayer(music=file_name)
             logger.info('Successfully Reported the Time.')
             return
@@ -34,4 +34,3 @@ def time_reporting():
 # TODO 记录网络失常时间，把网络失常时间作为报表记录下来
 def check_wifi():
     return
-
