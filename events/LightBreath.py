@@ -14,6 +14,9 @@ if os_platform == 'linux' or os_platform == 'Linux':
             GPIO.output(light_code, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(light_code, GPIO.LOW)
+else:
+    def LightBreath(light_code):
+        print('It is fake.')
 
 if __name__ == '__main__':
     LightBreath(11)
