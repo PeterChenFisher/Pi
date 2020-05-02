@@ -21,13 +21,7 @@ if os_platform == 'linux' or os_platform == 'Linux':
 
 
 def test_condition():
-    # music_play.read_pure_music()
-    # music_play.read_musics()
-    # reformat_music_type.reformat_cloud_musics()
-    # music_play.random_play(times=3)
-    # music_play.read_cloud_music()
-    # Oclock.weekday_morning_oclock()
-    DDingWarn.request_ding(result=['测试'])
+    music_play.random_play(None, 'commandline', 1, pure_musics_mode)
     return
 
 
