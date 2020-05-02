@@ -1,5 +1,5 @@
 import time
-from tools import music_play, log, socket_post, Text2Speech, reformat_music_type
+from tools import music_play, log, socket_post, Text2Speech, reformat_music_type, DDingWarn
 from events import Bibles, Oclock
 from config import *
 import threading
@@ -23,7 +23,8 @@ def test_condition():
     # reformat_music_type.reformat_cloud_musics()
     # music_play.random_play(times=3)
     # music_play.read_cloud_music()
-    Oclock.weekday_morning_oclock()
+    # Oclock.weekday_morning_oclock()
+    DDingWarn.request_ding(result=['测试'])
     return
 
 
