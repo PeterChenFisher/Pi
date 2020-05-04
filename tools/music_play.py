@@ -99,11 +99,7 @@ def reload_sig_state_switch():
 def pi_mplayer(music):
     commandline = 'mplayer ' + str(music)
     logger.info('命令行：' + commandline)
-    stt = time.time()
     result = os.system(commandline)
-    time_interval = time.time() - stt
-    if time_interval < 5:
-        request_ding(result=['音乐播放时常不正常'])
 
     if result == 0:
         logger.info('音乐播放成功.')
