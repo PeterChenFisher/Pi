@@ -10,7 +10,7 @@ from tools.reply_template import *
 def time_reporting():
     now = time.localtime()
     hour, minute = now[3], now[4]
-    text = f'现在是{hour}点{minute}分'
+    text = f'{hour}点{minute}'
     file_name = f'TimeReport_{hour}-{minute}.mp3'
     file_name = os.path.join(time_report_tts_location, file_name)
     if os.path.isfile(file_name):
