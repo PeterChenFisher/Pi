@@ -5,7 +5,7 @@ from tools import log, reply_template
 logger = log.logger
 
 
-def server_chan_post(title='空标题', content='空内容'):
+def server_chan_post(server_chan_url, title='空标题', content='空内容'):
     # server_chan_url = 'https://sc.ftqq.com/SCU94437T1b2b37c7817871dd85a19596a60c0a0b5e9b036b67e40.send'
     data = {
         'text': title,
@@ -13,7 +13,7 @@ def server_chan_post(title='空标题', content='空内容'):
     }
     logger.info(f'推送到Server酱微信告警的内容为：{data}')
     try:
-        resp = requests.get(url=Dingding.server_chan_url, params=data)
+        resp = requests.get(url=server_chan_url, params=data)
     except:
         logger.info(f'推送到Server酱失败。请检查网络连接。')
         return reply_template.template(message='推送到Server酱失败。请检查网络连接。')
