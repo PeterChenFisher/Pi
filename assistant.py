@@ -21,7 +21,7 @@ if os_platform == 'linux' or os_platform == 'Linux':
 
 
 def test_condition():
-    music_play.random_play(None, 'commandline', 1, pure_musics_mode)
+    Bibles.daily_scripture()
     return
 
 
