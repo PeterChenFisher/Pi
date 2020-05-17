@@ -11,8 +11,11 @@ def daily_scripture():
     update_url_list()
     scripture = get_very_day_scripture()
     logger.info('今日经文请求钉钉！')
-    result = ServerChanWarn.server_chan_post(title='今日经文', content=str(scripture))
-    DDingWarn.request_ding(result=[str(scripture), f'{result[key_message]}'])
+    result1 = ServerChanWarn.server_chan_post(server_chan_url=Dingding.server_chan_url_wn, title='今日经文',
+                                              content=str(scripture))
+    result2 = ServerChanWarn.server_chan_post(server_chan_url=Dingding.server_chan_url_vinky, title='今日经文',
+                                              content=str(scripture))
+    DDingWarn.request_ding(result=[str(scripture), f'Vinky:{result1[key_message]} \nWN:{result2[key_message]}'])
     logger.info(f'爬取每日经文结束。')
     return
 
