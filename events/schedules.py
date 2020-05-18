@@ -30,7 +30,7 @@ def initiator():
 
 def add_block_schedule_jobs(BlockScheduler):
     # 周中早起闹钟音乐
-    BlockScheduler.add_job(func=weekday_morning_oclock, trigger='cron', max_instances=10, month='*',
+    BlockScheduler.add_job(func=time_report_morning_oclock, trigger='cron', max_instances=10, month='*',
                            day_of_week='mon,tue,wed,thu,fri', hour='6', minute='40')
     # 周末早起闹钟音乐
     BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 10), trigger='cron',
