@@ -36,4 +36,4 @@ def reformat_pure_musics():
 
 
 # reformat_pure_musics()
-# reformat_cloud_musics()
+reformat_cloud_musics()

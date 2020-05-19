@@ -36,14 +36,16 @@ def executer():
         arg2 = args[2] if len(args) >= 3 else normal_music_mode
         times = int(args[3]) if len(args) >= 4 else 50
         music_play.random_play(method='commandline', times=times, mode=arg2)
-    # elif arg1 == 'record_temp':
-    #     if os_platform == 'linux' or os_platform == 'Linux':
-    #         FansCTR.record_temp()
+    elif arg1 == 'record_temp':
+        if os_platform == 'linux' or os_platform == 'Linux':
+            FansCTR.record_temp()
     elif arg1 == 'fans_ctr':
         if os_platform == 'linux' or os_platform == 'Linux':
             FansCTR.fans_ctrl()
     elif arg1 == 'daily_scriputre':
         Bibles.daily_scripture()
+    elif arg1 == 'reformat_music':
+        reformat_music_type.reformat_cloud_musics()
 
 
 if __name__ == '__main__':

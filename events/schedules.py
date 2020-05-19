@@ -1,4 +1,4 @@
-from tools import ip_update, socket_wait, music_play
+from tools import ip_update, socket_wait, music_play, reformat_music_type
 from .Oclock import time_report_morning_oclock
 from events.Bibles import *
 import threading
@@ -47,4 +47,6 @@ def add_back_schedule_jobs(BackScheduler):
     #                       max_instances=10, month='*', day='*', hour='*', minute='00')
     # 每4天重置一次播放器中的音乐列表读取信号reload_sig，使播放器每4天重新获取一次音乐列表
     BackScheduler.add_job(func=music_play.reload_sig_state_switch, trigger='interval', days=4)
+    # 每2天重置一次播放器中的音乐列表读取信号reload_sig，使播放器每4天重新获取一次音乐列表
+    BackScheduler.add_job(func=reformat_music_type.reformat_cloud_musics, trigger='interval', days=2)
     return
