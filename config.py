@@ -73,5 +73,7 @@ raspi_temp_result_file = './raspi-temp-record.txt'
 
 BaiduYunTokenFileLocation = './BaiduYunToken.json'
 
+ProjAutomationUpdateBashFile = './ProjAutomation-UpdateCode.sh'
+
 mk_dirs([excluded_file, tts_location, time_report_tts_location, assistant_log_path])
 # init_music_location()
