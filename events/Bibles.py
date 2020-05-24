@@ -20,5 +20,10 @@ def daily_scripture():
     return
 
 
+def SetTimer(hour, minute, second, func):
+
+    return
+
+
 if __name__ == '__main__':
     daily_scripture()

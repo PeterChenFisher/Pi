@@ -6,6 +6,8 @@ import time
 from tools import music_play, socket_post, Text2Speech, reformat_music_type, DDingWarn
 from events import Bibles, Oclock
 import threading
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 mk_dirs([excluded_file, tts_location, time_report_tts_location])
 manual = '''
@@ -48,6 +50,7 @@ def executer():
         reformat_music_type.reformat_cloud_musics()
 
 
+# 实现assistant的timer或scheduler，使用该scheduler对单独定时任务进行处理
 if __name__ == '__main__':
     logger = log.logger
     if len(sys.argv) == 1:
