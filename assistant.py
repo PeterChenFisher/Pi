@@ -21,7 +21,8 @@ if os_platform == 'linux' or os_platform == 'Linux':
 
 
 def test_condition():
-    Bibles.daily_scripture()
+    # Text2Speech.get_token()
+    Text2Speech.text2speech(text='测试：2020-05-24')
     return
 
 
