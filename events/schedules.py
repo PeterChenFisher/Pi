@@ -49,6 +49,11 @@ def add_back_schedule_jobs(BackScheduler):
     BackScheduler.add_job(func=music_play.reload_sig_state_switch, trigger='interval', days=4)
     # 每2天，将音乐txt文件更新为直链播放json文件
     BackScheduler.add_job(func=reformat_music_type.reformat_cloud_musics, trigger='interval', days=2)
-    # TODO pythongit：自动更新本地代码、音乐文件
-    # TODO 百度云secret key自动获取，并更新到一个文件中
+    # 每两天自动拉取更新代码
+    BackScheduler.add_job(func=os.system(command=f'bash {ProjAutomationUpdateBashFile}'))
     return
+
+
+def pull_codes_automatically():
+    command = f'bash {ProjAutomationUpdateBashFile}'
+    os.system(command)
