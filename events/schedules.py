@@ -50,7 +50,7 @@ def add_back_schedule_jobs(BackScheduler):
     # 每2天，将音乐txt文件更新为直链播放json文件
     BackScheduler.add_job(func=reformat_music_type.reformat_cloud_musics, trigger='interval', days=2)
     # 每两天自动拉取更新代码
-    BackScheduler.add_job(func=os.system(command=f'bash {ProjAutomationUpdateBashFile}'))
+    BackScheduler.add_job(func=os.system, args=(f'bash {ProjAutomationUpdateBashFile}',), trigger='interval', days=1)
     return
 
 
