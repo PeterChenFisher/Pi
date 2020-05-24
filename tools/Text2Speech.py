@@ -1,9 +1,12 @@
 import os
+import json
 import requests
 import config
 from tools.log import logger
 from tools import DDingWarn
 from tools.reply_template import *
+
+auth = None
 
 
 # 获取调用百度api的token，auth为返回的结果
@@ -18,22 +21,29 @@ def get_token():
               'client_id': APIKey,
               'client_secret': SecretKey}
     a = requests.get(url, params=params)
-    print(a.text)
-    return template(success=True, data=a.text)
+    auth = eval(a.text)
+    file_location = config.BaiduYunTokenFileLocation
+    with open(file_location, 'w+', encoding='utf-8') as fo:
+        json.dump(auth, fo, indent='  ', ensure_ascii=False)
+
+    return template(success=True, data=auth)
 
 
-auth = {"refresh_token": "25.21b2c2c3c7506d5afddd640d5ab84e70.315360000.1902370384.282335-16991715",
-        "expires_in": 2592000,
-        "session_key": "9mzdXqfbfyvF5T64ALMRYxtnJegG3tBTCSZsXSsnBQaMpimMBkxHNG2oZnXbI5HFJSlXzn1VNiJoVVeTiR\/D2o7E+Fo6iQ==",
-        "access_token": "24.eb2e4640b0aff1531249056d3450f891.2592000.1589602384.282335-16991715",
-        "scope": "brain_qrcode brain_ocr_business_card vis-ocr_\u673a\u52a8\u8f66\u68c0\u9a8c\u5408\u683c\u8bc1\u8bc6\u522b vis-ocr_\u4fdd\u5355\u8bc6\u522b vis-ocr_\u884c\u7a0b\u5355\u8bc6\u522b brain_ocr_vehicle_certificate brain_ocr_air_ticket brain_ocr_insurance_doc audio_tts_post public vis-ocr_ocr brain_ocr_scope brain_ocr_general brain_ocr_general_basic vis-ocr_business_license brain_ocr_webimage brain_all_scope brain_ocr_idcard brain_ocr_driving_license brain_ocr_vehicle_license vis-ocr_plate_number brain_solution brain_ocr_plate_number brain_ocr_accurate brain_ocr_accurate_basic brain_ocr_receipt brain_ocr_business_license brain_solution_iocr brain_ocr_handwriting brain_ocr_passport brain_ocr_vat_invoice brain_numbers brain_ocr_train_ticket brain_ocr_taxi_receipt vis-ocr_household_register vis-ocr_vis-classify_birth_certificate vis-ocr_\u53f0\u6e7e\u901a\u884c\u8bc1 vis-ocr_\u6e2f\u6fb3\u901a\u884c\u8bc1 vis-ocr_\u8f66\u8f86vin\u7801\u8bc6\u522b vis-ocr_\u5b9a\u989d\u53d1\u7968\u8bc6\u522b brain_ocr_vin brain_ocr_quota_invoice brain_ocr_birth_certificate brain_ocr_household_register brain_ocr_HK_Macau_pass brain_ocr_taiwan_pass wise_adapt lebo_resource_base lightservice_public hetu_basic lightcms_map_poi kaidian_kaidian ApsMisTest_Test\u6743\u9650 vis-classify_flower lpq_\u5f00\u653e cop_helloScope ApsMis_fangdi_permission smartapp_snsapi_base iop_autocar oauth_tp_app smartapp_smart_game_openapi oauth_sessionkey smartapp_swanid_verify smartapp_opensource_openapi smartapp_opensource_recapi qatest_scope1 fake_face_detect_\u5f00\u653eScope vis-ocr_\u865a\u62df\u4eba\u7269\u52a9\u7406 idl-video_\u865a\u62df\u4eba\u7269\u52a9\u7406",
-        "session_secret": "8aa1730f501fc7128ee4994487f2de84"}
+def read_token():
+    global auth
+    if not auth:
+        with open(config.BaiduYunTokenFileLocation, 'r+', encoding='utf-8') as fo:
+            auth = json.load(fp=fo)
+        auth = eval(auth)
+    return
 
 
 # 注意aue=4或者6是语音识别要求的格式，但是音频内容不是语音识别要求的自然人发音，所以识别效果会受影响。
-
-
 def text2speech(text, file_location=config.tts_location, file_name=None):
+    global auth
+
+    read_token()
+    print(auth)
     tok = auth['access_token']
     cuid = 'abc'  # 用户唯一标识
     ctp = '1'  # 客户端类型选择
@@ -54,8 +64,9 @@ def text2speech(text, file_location=config.tts_location, file_name=None):
         DDingWarn.request_ding(result=[f'请求百度失败！请检查网络连接~  {e}'])
         return template(message=f'请求百度失败！请检查网络连接~  {e}')
     if res.content[2:12] == b'err_detail':
-        DDingWarn.request_ding(['请求百度成功，但秘钥错误！'])
-        return template(message='请求百度成功，但秘钥错误！')
+        DDingWarn.request_ding(['请求百度成功，但秘钥错误！现在尝试获取新秘钥！'])
+        get_token()
+        return template(message='请求百度成功，但秘钥错误！已经尝试获取新秘钥！等待下一次请求结果！')
 
     if file_name is None:
         file_name = text[:5]
@@ -63,9 +74,3 @@ def text2speech(text, file_location=config.tts_location, file_name=None):
     with open(file_name, 'wb') as fo:
         fo.write(res.content)
     return template(success=True, data=file_name)
-
-
-if __name__ == '__main__':
-    # get_token()
-    text = '测试！测试！'
-    file = text2speech(text, file_location='.')

@@ -71,5 +71,7 @@ heart_beat_text2 = '早点睡觉！晚安！'
 
 raspi_temp_result_file = './raspi-temp-record.txt'
 
+BaiduYunTokenFileLocation = './BaiduYunToken.json'
+
 mk_dirs([excluded_file, tts_location, time_report_tts_location, assistant_log_path])
 # init_music_location()
