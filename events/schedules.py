@@ -47,6 +47,8 @@ def add_back_schedule_jobs(BackScheduler):
     #                       max_instances=10, month='*', day='*', hour='*', minute='00')
     # 每4天重置一次播放器中的音乐列表读取信号reload_sig，使播放器每4天重新获取一次音乐列表
     BackScheduler.add_job(func=music_play.reload_sig_state_switch, trigger='interval', days=4)
-    # 每2天重置一次播放器中的音乐列表读取信号reload_sig，使播放器每4天重新获取一次音乐列表
+    # 每2天，将音乐txt文件更新为直链播放json文件
     BackScheduler.add_job(func=reformat_music_type.reformat_cloud_musics, trigger='interval', days=2)
+    # TODO pythongit：自动更新本地代码、音乐文件
+    # TODO 百度云secret key自动获取，并更新到一个文件中
     return
