@@ -21,8 +21,7 @@ if os_platform == 'linux' or os_platform == 'Linux':
 
 
 def test_condition():
-    # Text2Speech.get_token()
-    Text2Speech.text2speech(text='测试：2020-05-24')
+    os.system(command=f'bash {ProjAutomationUpdateBashFile}')
     return
 
 
