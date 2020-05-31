@@ -22,10 +22,10 @@ def initiator():
     light_breath_th = threading.Thread(target=LightBreath.LightBreath, args=(11,))
     light_breath_th.start()
 
-    wait_socket_th = threading.Thread(target=socket_wait.socket_wait, args=(events_to_run,))
-    wait_socket_th.start()
-    wait_sig_and_run_th = threading.Thread(target=socket_wait.wait_signal_and_run, args=(events_to_run,))
-    wait_sig_and_run_th.start()
+    # wait_socket_th = threading.Thread(target=socket_wait.socket_wait, args=(events_to_run,))
+    # wait_socket_th.start()
+    # wait_sig_and_run_th = threading.Thread(target=socket_wait.wait_signal_and_run, args=(events_to_run,))
+    # wait_sig_and_run_th.start()
 
 
 def add_block_schedule_jobs(BlockScheduler):
@@ -52,8 +52,3 @@ def add_back_schedule_jobs(BackScheduler):
     # 每两天自动拉取更新代码
     BackScheduler.add_job(func=os.system, args=(f'bash {ProjAutomationUpdateBashFile}',), trigger='interval', days=1)
     return
-
-
-def pull_codes_automatically():
-    command = f'bash {ProjAutomationUpdateBashFile}'
-    os.system(command)
