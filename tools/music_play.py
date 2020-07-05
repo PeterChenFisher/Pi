@@ -19,9 +19,8 @@ def read_pure_music(musics_location=None):
     if not musics_location:
         musics_location = pure_musics_file_location
 
-    if not pure_musics:
-        with open(musics_location, 'r+', encoding='utf-8') as fo:
-            pure_musics = json.load(fp=fo)
+    with open(musics_location, 'r+', encoding='utf-8') as fo:
+        pure_musics = json.load(fp=fo)
     logger.info('纯音乐列表：')
     for key, value in pure_musics.items():
         logger.info(f'    {key}:{value}')
@@ -46,13 +45,12 @@ def read_local_musics(musics_location=None):
 
     if not musics_location:
         musics_location = local_music_location
-    if not local_musics:
-        musics = os.listdir(musics_location)
-        local_musics = {i: os.path.join(musics_location, i).replace(' ', '\ ').replace('(', '\(').replace(')', '\)') for
-                        i in musics if i.endswith(('.mp3', 'm4a'))}
-        logger.info('本地音乐：')
-        for music, music_location in local_musics.items():
-            logger.info(f'    {music}:{music_location}')
+    musics = os.listdir(musics_location)
+    local_musics = {i: os.path.join(musics_location, i).replace(' ', '\ ').replace('(', '\(').replace(')', '\)') for
+                    i in musics if i.endswith(('.mp3', 'm4a'))}
+    logger.info('本地音乐：')
+    for music, music_location in local_musics.items():
+        logger.info(f'    {music}:{music_location}')
 
 
 def random_play(musics_location=None, method='commandline', times=1, mode=normal_music_mode):
