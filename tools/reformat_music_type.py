@@ -34,6 +34,5 @@ def reformat_pure_musics():
         json.dump(pure_musics, fo, indent='  ', ensure_ascii=False)
     return
 
-
 # reformat_pure_musics()
-reformat_cloud_musics()
+# reformat_cloud_musics()
