@@ -35,7 +35,7 @@ def add_block_schedule_jobs(BlockScheduler):
     # 周末早起闹钟音乐
     BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 10), trigger='cron',
                            max_instances=10, month='*', day_of_week='sat,sun', hour='8', minute='30')
-    # 每天早上爬取灵修经文并推送到钉钉
+    # 每天早上爬取灵修经文并推送到钉钉和server酱
     BlockScheduler.add_job(func=daily_scripture, trigger='cron', max_instances=10, month='*', day='*',
                            hour='6', minute='15')
     return
