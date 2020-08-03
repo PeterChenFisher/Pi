@@ -9,7 +9,7 @@ fi
 date >> excluded/git_process/ProjAuto.log
 echo "Start Project Automation Script" >> excluded/git_process/ProjAuto.log
 git pull>> excluded/git_process/ProjAuto.log
-PID=$(ps -e|grep python | awk '{printf $1}')
+PID=$(ps -e|grep main.py | awk '{printf $1}')
 echo "Main Script PID is: $PID" >> excluded/git_process/ProjAuto.log
 sudo kill -9 ${PID} >> excluded/git_process/ProjAuto.log
 if [ $? -eq 0 ];then
