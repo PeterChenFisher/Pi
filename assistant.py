@@ -1,5 +1,6 @@
 from tools import log
 from config import *
+import sched
 
 logger = log.set_logger(mode=Mode.Assistant)
 import time
@@ -44,7 +45,7 @@ def executer():
     elif arg1 == 'fans_ctr':
         if os_platform == 'linux' or os_platform == 'Linux':
             FansCTR.fans_ctrl()
-    elif arg1 == 'daily_scriputre':
+    elif arg1 == 'daily_scripture':
         Bibles.daily_scripture()
     elif arg1 == 'reformat_music':
         reformat_music_type.reformat_cloud_musics()
