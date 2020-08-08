@@ -7,25 +7,17 @@ from config import *
 
 logger = log.logger
 ip_addr = None
-events_to_run = {
-    music_play.random_play: ['random_play', False]
-}
 
 
+# 程序初始化：初始时候需要启动的线程和任务
 def initiator():
-    # 程序初始化：初始时候需要启动的线程和任务
-    DDingWarn.request_ding(['你的音乐闹钟项目正在启动！'])
+    DDingWarn.logger = log.logger_generator(logger_name='PeterPi')
+    music_play.logger = log.logger_generator(logger_name='PeterPi')
 
-    # ip_addr_monitor_th = threading.Thread(target=ip_update.ip_addr_monitor)
-    # ip_addr_monitor_th.start()
+    DDingWarn.request_ding(['你的音乐闹钟项目正在启动！'])
 
     light_breath_th = threading.Thread(target=LightBreath.LightBreath, args=(11,))
     light_breath_th.start()
-
-    # wait_socket_th = threading.Thread(target=socket_wait.socket_wait, args=(events_to_run,))
-    # wait_socket_th.start()
-    # wait_sig_and_run_th = threading.Thread(target=socket_wait.wait_signal_and_run, args=(events_to_run,))
-    # wait_sig_and_run_th.start()
 
 
 def add_block_schedule_jobs(BlockScheduler):
