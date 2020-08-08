@@ -49,6 +49,7 @@ def executer():
         reformat_music_type.reformat_cloud_musics()
     elif arg1 == 'ip_monitor':
         ip_update.logger = log.logger_generator(logger_name='IPMonitor')
+        DDingWarn.logger = log.logger_generator(logger_name='IPMonitor')
         ip_update.ip_addr_monitor()
 
 
