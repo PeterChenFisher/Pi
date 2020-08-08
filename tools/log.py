@@ -20,7 +20,7 @@ def logger_generator(logger_name, when='midnight', log_path=None, logger=None):
     formatter = logging.Formatter(
         '[%(asctime)s] - [ %(name)s ] - %(levelname)s - %(message)s')
     if not logger.handlers:
-        timedRotatingFileHandler = TimedRotatingFileHandler(filename=os.path.join(base_logger_path, logger_name), when=when,
+        timedRotatingFileHandler = TimedRotatingFileHandler(filename=base_logger_path, when=when,
                                                             interval=1, backupCount=60, encoding='utf-8')
         timedRotatingFileHandler.suffix = "%Y-%m-%d.log"
         timedRotatingFileHandler.setLevel(logging.INFO)
