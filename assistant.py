@@ -18,7 +18,9 @@ if os_platform == 'linux' or os_platform == 'Linux':
 
 
 def test_condition():
-    ip_update.ip_addr_monitor()
+    DDingWarn.logger = log.logger_generator(logger_name='Test')
+    Text2Speech.logger = log.logger_generator(logger_name='Test')
+    Text2Speech.text2speech(text='test')
     return
 
 
@@ -30,7 +32,8 @@ def executer():
     if arg1 == 'tips':
         logger.info(manual)
     elif arg1 == 'player':
-
+        music_play.logger = log.logger_generator(logger_name='MusicPlayer')
+        DDingWarn.logger = log.logger_generator(logger_name='MusicPlayer')
         arg2 = args[2] if len(args) >= 3 else normal_music_mode
         times = int(args[3]) if len(args) >= 4 else 50
         music_play.random_play(method='commandline', times=times, mode=arg2)
