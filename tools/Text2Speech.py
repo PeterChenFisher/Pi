@@ -2,11 +2,12 @@ import os
 import json
 import requests
 import config
-from tools.log import logger
+from tools import log
 from tools import DDingWarn
 from tools.reply_template import *
 
 auth = None
+logger = log.logger
 
 
 # 获取调用百度api的token，auth为返回的结果
@@ -34,7 +35,7 @@ def read_token():
     if not auth:
         with open(config.BaiduYunTokenFileLocation, 'r+', encoding='utf-8') as fo:
             auth = json.load(fp=fo)
-        auth = eval(auth)
+        # auth = eval(auth)
     return
 
 
