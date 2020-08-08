@@ -1,15 +1,9 @@
-from tools import log
+from tools import log, DDingWarn, ip_update, music_play, Text2Speech, reformat_music_type
 from config import *
-from tools import ip_update
+from Spiders import jdjzww_daily
+from events import Bibles
 
-logger = log.set_logger(mode=Mode.Assistant)
-import time
-from tools import music_play, socket_post, Text2Speech, reformat_music_type, DDingWarn
-from events import Bibles, Oclock
-import threading
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.schedulers.blocking import BlockingScheduler
-
+logger = log.logger_generator(logger_name='Assistant')
 mk_dirs([excluded_file, tts_location, time_report_tts_location])
 manual = '''
 tips;
@@ -24,7 +18,7 @@ if os_platform == 'linux' or os_platform == 'Linux':
 
 
 def test_condition():
-    os.system(command=f'bash {ProjAutomationUpdateBashFile}')
+    ip_update.ip_addr_monitor()
     return
 
 
@@ -36,6 +30,7 @@ def executer():
     if arg1 == 'tips':
         logger.info(manual)
     elif arg1 == 'player':
+
         arg2 = args[2] if len(args) >= 3 else normal_music_mode
         times = int(args[3]) if len(args) >= 4 else 50
         music_play.random_play(method='commandline', times=times, mode=arg2)
@@ -46,17 +41,19 @@ def executer():
         if os_platform == 'linux' or os_platform == 'Linux':
             FansCTR.fans_ctrl()
     elif arg1 == 'daily_scripture':
-        # Bibles.daily_scripture()
+        Bibles.logger = log.logger_generator(logger_name='DailyScripture')
+        jdjzww_daily.logger = log.logger_generator(logger_name='DailyScripture')
+        DDingWarn.logger = log.logger_generator(logger_name='DailyScripture')
         Bibles.send_today_scripture()
     elif arg1 == 'reformat_music':
         reformat_music_type.reformat_cloud_musics()
     elif arg1 == 'ip_monitor':
+        ip_update.logger = log.logger_generator(logger_name='IPMonitor')
         ip_update.ip_addr_monitor()
 
 
 # 实现assistant的timer或scheduler，使用该scheduler对单独定时任务进行处理
 if __name__ == '__main__':
-    logger = log.logger
     if len(sys.argv) == 1:
         test_condition()
     else:

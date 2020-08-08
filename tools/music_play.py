@@ -1,7 +1,7 @@
 import time
 import json
 import random
-from .log import logger
+from . import log
 from .DDingWarn import request_ding
 from .ip_update import check_network_status
 from config import *
@@ -11,7 +11,7 @@ pure_musics = {}
 cloud_musics = {}
 
 reload_sig = True
-
+logger = log.logger
 
 def read_pure_music(musics_location=None):
     global pure_musics

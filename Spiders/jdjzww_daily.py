@@ -2,8 +2,9 @@ import datetime
 import requests
 from bs4 import BeautifulSoup
 from config import *
-from tools.log import logger
+from tools import log
 
+logger = log.logger
 daily_food_urls = {}
 
 

@@ -3,13 +3,12 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
 from tools import log
-log.set_logger(mode='PeterPi')
 import events
 from config import *
 
 if __name__ == '__main__':
     # 程序启动初始化
-    logger = log.logger
+    logger = log.logger_generator(logger_name='PeterPi')
     mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
     # 从启动器启动任务/进行初始化
