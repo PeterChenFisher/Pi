@@ -24,6 +24,7 @@ def send_today_scripture():
 
 
 def daily_scripture():
+
     return
 
 
