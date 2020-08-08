@@ -14,10 +14,10 @@ events_to_run = {
 
 def initiator():
     # 程序初始化：初始时候需要启动的线程和任务
-    DDingWarn.request_ding(['你的石头派项目正在启动！'])
+    DDingWarn.request_ding(['你的音乐闹钟项目正在启动！'])
 
-    ip_addr_monitor_th = threading.Thread(target=ip_update.ip_addr_monitor)
-    ip_addr_monitor_th.start()
+    # ip_addr_monitor_th = threading.Thread(target=ip_update.ip_addr_monitor)
+    # ip_addr_monitor_th.start()
 
     light_breath_th = threading.Thread(target=LightBreath.LightBreath, args=(11,))
     light_breath_th.start()
@@ -35,9 +35,9 @@ def add_block_schedule_jobs(BlockScheduler):
     # 周末早起闹钟音乐
     BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 10), trigger='cron',
                            max_instances=10, month='*', day_of_week='sat,sun', hour='8', minute='30')
-    # 每天早上爬取灵修经文并推送到钉钉和server酱
-    BlockScheduler.add_job(func=send_today_scripture, trigger='cron', max_instances=10, month='*', day='*',
-                           hour='6', minute='15')
+    # # 每天早上爬取灵修经文并推送到钉钉和server酱
+    # BlockScheduler.add_job(func=send_today_scripture, trigger='cron', max_instances=10, month='*', day='*',
+    #                        hour='6', minute='15')
     return
 
 
@@ -49,6 +49,6 @@ def add_back_schedule_jobs(BackScheduler):
     BackScheduler.add_job(func=music_play.reload_sig_state_switch, trigger='interval', days=4)
     # 每2天，将音乐txt文件更新为直链播放json文件
     BackScheduler.add_job(func=reformat_music_type.reformat_cloud_musics, trigger='interval', days=2)
-    # 每两天自动拉取更新代码
+    # 每2天自动拉取更新代码
     BackScheduler.add_job(func=os.system, args=(f'bash {ProjAutomationUpdateBashFile}',), trigger='interval', days=1)
     return

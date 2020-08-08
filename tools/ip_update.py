@@ -54,17 +54,17 @@ def get_ip_address():
 def ip_addr_monitor():
     global ip_addr
 
-    inner_ip_addr = None
+    realtime_ipaddr = None
     while 1:
-        if ip_addr is None or ip_addr != inner_ip_addr:
-            if wait_network_on():
-                ip_addr = get_ip_address()
+        if wait_network_on():
+            realtime_ipaddr = get_ip_address()
+        if ip_addr is None or ip_addr != realtime_ipaddr:
+                ip_addr = realtime_ipaddr
                 message_result = [
                     '你的树莓派IP地址是：',
                     f'    {ip_addr}'
                 ]
                 DDingWarn.request_ding(result=message_result)
-                inner_ip_addr = ip_addr
         time.sleep(60 * 5)
 
 

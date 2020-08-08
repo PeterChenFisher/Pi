@@ -1,6 +1,6 @@
 from tools import log
 from config import *
-import sched
+from tools import ip_update
 
 logger = log.set_logger(mode=Mode.Assistant)
 import time
@@ -50,6 +50,8 @@ def executer():
         Bibles.send_today_scripture()
     elif arg1 == 'reformat_music':
         reformat_music_type.reformat_cloud_musics()
+    elif arg1 == 'ip_monitor':
+        ip_update.ip_addr_monitor()
 
 
 # 实现assistant的timer或scheduler，使用该scheduler对单独定时任务进行处理
