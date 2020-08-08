@@ -46,7 +46,8 @@ def executer():
         if os_platform == 'linux' or os_platform == 'Linux':
             FansCTR.fans_ctrl()
     elif arg1 == 'daily_scripture':
-        Bibles.daily_scripture()
+        # Bibles.daily_scripture()
+        Bibles.send_today_scripture()
     elif arg1 == 'reformat_music':
         reformat_music_type.reformat_cloud_musics()
 
