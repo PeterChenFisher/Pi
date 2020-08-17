@@ -1,10 +1,12 @@
-from tools.log import logger
+from tools import log
 from tools.Text2Speech import text2speech
 from config import *
 from tools.music_play import pi_mplayer
 import time
 import os
 from tools.reply_template import *
+
+logger = log.logger
 
 
 def time_reporting():
