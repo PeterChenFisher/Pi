@@ -8,7 +8,7 @@ from config import *
 
 if __name__ == '__main__':
     # 程序启动初始化
-    logger = log.logger_generator(logger_name='PeterPi')
+    logger = log.logger_generator(logger_name='MusicOclock')
     mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
     # 从启动器启动任务/进行初始化
