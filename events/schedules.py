@@ -1,6 +1,7 @@
 from tools import ip_update, socket_wait, music_play, reformat_music_type
 from .Oclock import time_report_morning_oclock
 from events.Bibles import *
+from events import heart_beats
 import threading
 from . import LightBreath
 from config import *
@@ -11,8 +12,9 @@ ip_addr = None
 
 # 程序初始化：初始时候需要启动的线程和任务
 def initiator():
-    DDingWarn.logger = log.logger_generator(logger_name='MusicOclock')
-    music_play.logger = log.logger_generator(logger_name='MusicOclock')
+    DDingWarn.logger = log.logger_generator(logger_name='PeterPi')
+    music_play.logger = log.logger_generator(logger_name='PeterPi')
+    heart_beats.logger = log.logger_generator(logger_name='PeterPi')
 
     DDingWarn.request_ding(['你的音乐闹钟项目正在启动！'])
 
