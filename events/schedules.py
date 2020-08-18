@@ -11,8 +11,8 @@ ip_addr = None
 
 # 程序初始化：初始时候需要启动的线程和任务
 def initiator():
-    DDingWarn.logger = log.logger_generator(logger_name='PeterPi')
-    music_play.logger = log.logger_generator(logger_name='PeterPi')
+    DDingWarn.logger = log.logger_generator(logger_name='MusicOclock')
+    music_play.logger = log.logger_generator(logger_name='MusicOclock')
 
     DDingWarn.request_ding(['你的音乐闹钟项目正在启动！'])
 
