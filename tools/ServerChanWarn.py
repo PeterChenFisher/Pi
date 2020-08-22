@@ -1,5 +1,4 @@
 import requests
-from config import *
 from tools import log, reply_template
 
 logger = log.logger
