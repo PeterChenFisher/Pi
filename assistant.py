@@ -1,4 +1,4 @@
-from tools import log, DDingWarn, ip_update, music_play, Text2Speech, reformat_music_type
+from tools import log, DDingWarn, ip_update, music_play, Text2Speech, reformat_music_type, ServerChanWarn
 from config import *
 from Spiders import jdjzww_daily
 from events import Bibles
@@ -47,6 +47,7 @@ def executer():
         Bibles.logger = log.logger_generator(logger_name='DailyScripture')
         jdjzww_daily.logger = log.logger_generator(logger_name='DailyScripture')
         DDingWarn.logger = log.logger_generator(logger_name='DailyScripture')
+        ServerChanWarn.logger = log.logger_generator(logger_name='DailyScriputre')
         Bibles.send_today_scripture()
     elif arg1 == 'reformat_music':
         reformat_music_type.reformat_cloud_musics()
