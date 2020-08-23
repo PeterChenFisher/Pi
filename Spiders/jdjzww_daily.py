@@ -14,6 +14,7 @@ def get_scripture(url):
     # soup = BeautifulSoup(resp.text, 'html5lib')
     soup = BeautifulSoup(resp.text)
     scripture = soup.find('div', class_='texts').p.next
+    scripture = scripture.text
     return scripture
 
 
