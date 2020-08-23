@@ -47,7 +47,7 @@ def executer():
         Bibles.logger = log.logger_generator(logger_name='DailyScripture')
         jdjzww_daily.logger = log.logger_generator(logger_name='DailyScripture')
         DDingWarn.logger = log.logger_generator(logger_name='DailyScripture')
-        ServerChanWarn.logger = log.logger_generator(logger_name='DailyScriputre')
+        ServerChanWarn.logger = log.logger_generator(logger_name='DailyScripture')
         Bibles.send_today_scripture()
     elif arg1 == 'reformat_music':
         reformat_music_type.reformat_cloud_musics()
