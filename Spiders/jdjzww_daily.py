@@ -11,10 +11,10 @@ daily_food_urls = {}
 def get_scripture(url):
     resp = requests.request(method='get', url=url)
     resp.encoding = 'utf-8'
-    # soup = BeautifulSoup(resp.text, 'html5lib')
-    soup = BeautifulSoup(resp.text)
+    soup = BeautifulSoup(resp.text, 'html5lib')
+    # soup = BeautifulSoup(resp.text)
     scripture = soup.find('div', class_='texts').p.next
-    # scripture = scripture.text
+    scripture = scripture.text
     return scripture
 
 
@@ -36,8 +36,8 @@ def update_url_list(request_times=0):
         return
     logger.info('读取网页成功！')
     resp.encoding = 'utf-8'
-    # soup = BeautifulSoup(resp.text, 'html5lib')
-    soup = BeautifulSoup(resp.text)
+    soup = BeautifulSoup(resp.text, 'html5lib')
+    # soup = BeautifulSoup(resp.text)
     hot_list = soup.find('div', id='hot-list')
     ul = hot_list.ul
     for li in ul:
