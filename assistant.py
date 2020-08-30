@@ -24,7 +24,7 @@ def test_condition():
     return
 
 
-def executer():
+def executor():
     global manual
     args = sys.argv
     logger.info('Receive args:' + ' - '.join(args))
@@ -63,4 +63,4 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:
         test_condition()
     else:
-        executer()
+        executor()
