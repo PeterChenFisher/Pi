@@ -64,3 +64,4 @@ if __name__ == '__main__':
         test_condition()
     else:
         executor()
+        test_condition()
