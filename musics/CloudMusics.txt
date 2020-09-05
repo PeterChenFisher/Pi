@@ -1,6 +1,9 @@
 Man on a Mission--http://music.163.com/song?id=465920383&userid=129882220
 梦想天空分外蓝--http://music.163.com/song?id=25638273&userid=129882220
+<<<<<<< HEAD
 成都--http://music.163.com/song?id=447926071&userid=129882220
+=======
+>>>>>>> 93a63f2635d1f8fac973ca8cddb7e6a86df3f6ff
 苦瓜--http://music.163.com/song?id=64293&userid=129882220
 Something Just Like This--http://music.163.com/song?id=461347998&userid=129882220
 I shall not want--http://music.163.com/song?id=27583628&userid=129882220
