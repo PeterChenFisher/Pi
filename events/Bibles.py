@@ -21,5 +21,6 @@ def send_today_scripture(test=False):
     result2 = ServerChanWarn.server_chan_post(server_chan_url=Dingding.server_chan_url_vinky, title='今日经文',
                                               content=str(scripture))
     DDingWarn.request_ding(result=[str(scripture), f'卫娜:{result1[key_message]}', f'温琦:{result2[key_message]}'])
+    # DDingWarn.request_ding(result=[str(scripture), f'卫娜:{result1[key_message]}'])
     logger.info(f'爬取每日经文结束。')
     return
