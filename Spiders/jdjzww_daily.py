@@ -14,8 +14,10 @@ def get_scripture(url):
     soup = BeautifulSoup(resp.text, 'html5lib')
     # soup = BeautifulSoup(resp.text)
     scripture = soup.find('div', class_='texts').p.next
-    scripture = scripture.contents
-    return scripture[0]
+
+    # scripture = scripture.contents
+    # return scripture[0]
+    return scripture
 
 
 def update_url_list(request_times=0):
