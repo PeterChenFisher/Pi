@@ -48,7 +48,7 @@ def read_local_musics(musics_location=None):
         musics_location = local_music_location
     musics = os.listdir(musics_location)
     local_musics = {i: os.path.join(musics_location, i).replace(' ', '\ ').replace('(', '\(').replace(')', '\)') for
-                    i in musics if i.endswith(('.mp3', 'm4a', 'flc'))}
+                    i in musics if i.endswith(('.mp3', 'm4a', 'flac'))}
     logger.info('本地音乐：')
     for music, music_location in local_musics.items():
         logger.info(f'    {music}:{music_location}')
