@@ -1,4 +1,4 @@
-cd /home/pi/Projects/Pi/
+cd /home/pi/Projects/old_pi/Pi/
 if [! -f "SongResult.txt"] then
     touch "SongResult.txt"
 fi
