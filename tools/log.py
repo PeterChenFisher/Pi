@@ -36,5 +36,5 @@ def logger_generator(logger_name, when='midnight', log_path=None, logger=None):
         logger.addHandler(timedRotatingFileHandler)
         logger.addHandler(streamHandler)
 
-        logger.info(f'\n  StartUp Project {logger.name}.\n')
+        logger.info(f'Init Logger {logger.name}.')
     return logger
