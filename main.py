@@ -8,11 +8,11 @@ from config import *
 
 if __name__ == '__main__':
     # 程序启动初始化
-    logger = log.logger_generator(logger_name='MusicOclock')
+    logger = log.logger_generator(logger_name='MusicClock')
     mk_dirs([excluded_file, tts_location, time_report_tts_location])
 
     # 从启动器启动任务/进行初始化
-    events.schedules.initiator()
+    events.schedules.initiator(logger_name='MusicClock')
 
     # 初始化任务调度器
     BlockScheduler = BlockingScheduler()

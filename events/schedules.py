@@ -1,20 +1,20 @@
-from tools import ip_update, socket_wait, music_play, reformat_music_type
-from .Oclock import time_report_morning_oclock
-from events.Bibles import *
-from events import heart_beats
 import threading
-from . import LightBreath
+
 from config import *
+from events import heart_beats, LightBreath
+from tools import DDingWarn, log, music_play, reformat_music_type, Text2Speech
+from .Oclock import time_report_morning_clock
 
 logger = log.logger
 ip_addr = None
 
 
 # 程序初始化：初始时候需要启动的线程和任务
-def initiator():
-    DDingWarn.logger = log.logger_generator(logger_name='PeterPi')
-    music_play.logger = log.logger_generator(logger_name='PeterPi')
-    heart_beats.logger = log.logger_generator(logger_name='PeterPi')
+def initiator(logger_name):
+    DDingWarn.logger = log.logger_generator(logger_name=logger_name)
+    music_play.logger = log.logger_generator(logger_name=logger_name)
+    heart_beats.logger = log.logger_generator(logger_name=logger_name)
+    Text2Speech.logger = log.logger_generator(logger_name=logger_name)
 
     DDingWarn.request_ding(['你的音乐闹钟项目正在启动！'])
 
@@ -24,14 +24,18 @@ def initiator():
 
 def add_block_schedule_jobs(BlockScheduler):
     # 周中早起闹钟音乐
-    BlockScheduler.add_job(func=time_report_morning_oclock, trigger='cron', max_instances=10, month='*',
+    BlockScheduler.add_job(func=time_report_morning_clock, trigger='cron', max_instances=10, month='*',
                            day_of_week='mon,tue,wed,thu,fri', hour='6', minute='40')
+    # BlockScheduler.add_job(func=time_report_morning_clock, trigger='cron', max_instances=10, month='*',
+    #                        day_of_week='sun', hour='6', minute='40')
     # 周末早起闹钟音乐
     BlockScheduler.add_job(func=music_play.random_play, args=('musics', 'commandline', 10), trigger='cron',
-                           max_instances=10, month='*', day_of_week='sat,sun', hour='8', minute='30')
-    # # 每天早上爬取灵修经文并推送到钉钉和server酱
-    # BlockScheduler.add_job(func=send_today_scripture, trigger='cron', max_instances=10, month='*', day='*',
-    #                        hour='6', minute='15')
+                           max_instances=10, month='*', day_of_week='sat,sun', hour='08', minute='30')
+    # 每天晚上十点半播放纯音乐-《使命》
+    BlockScheduler.add_job(func=music_play.pi_mplayer, args=('musics/使命.mp3',), trigger='cron',
+                           max_instances=10, month='*', hour='22', minute='30')
+    BlockScheduler.add_job(func=music_play.pi_mplayer, args=('musics/直到主耶稣再来时候.mp3',), trigger='cron',
+                           max_instances=10, month='*', hour='23', minute='00')
     return
 
 

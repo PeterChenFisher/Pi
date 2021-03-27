@@ -85,8 +85,14 @@ def random_play(musics_location=None, method='commandline', times=1, mode=normal
         music_names = list(musics.keys())
         ran_music = music_names[random.randint(0, len(musics) - 1)]
         logger.info(f'获取到的随机音乐：{ran_music}')
-        time.sleep(0.5)
+        stt = time.time()
         pi_mplayer(musics[ran_music])
+        edt = time.time()
+        play_time = edt - stt
+        if play_time <= 2:
+            request_ding(result=['音乐播放时长异常：', ran_music])
+        time.sleep(2)
+
     logger.info(f'随机音乐播放器播放结束')
 
 
@@ -98,13 +104,7 @@ def reload_sig_state_switch():
 def pi_mplayer(music):
     commandline = 'mplayer ' + str(music)
     logger.info('命令行：' + commandline)
-    stt = time.time()
     result = os.system(commandline)
-    edt = time.time()
-    play_time = edt - stt
-    if play_time <= 2:
-        request_ding(result=['音乐播放时长异常：', music])
-
     if result == 0:
         logger.info('音乐播放成功.')
         return True

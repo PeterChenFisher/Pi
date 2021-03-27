@@ -17,7 +17,7 @@ def request_ding(result, Warning=False, isAtAll=False, request_ding_time=0, ding
         logger.info('空信息。')
         return
     if not ding_url:
-        ding_url = config.Dingding.stone_pi
+        ding_url = config.Dingding.pi_alert
     atMobiles = None
     if Warning:
         atMobiles = None

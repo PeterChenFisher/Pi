@@ -1,1 +1,1 @@
-from . import jdjzww_daily
+from .SoulBread import jdjzww_daily

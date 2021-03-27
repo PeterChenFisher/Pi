@@ -9,18 +9,19 @@ from tools.reply_template import *
 logger = log.logger
 
 
-def time_reporting():
+def time_reporting(require_times=0, retry=False):
     now = time.localtime()
     hour, minute = now[3], now[4]
     text = f'{hour}点{minute}分'
     file_name = f'TimeReport_{hour}-{minute}.mp3'
     file_name = os.path.join(time_report_tts_location, file_name)
     if os.path.isfile(file_name):
-        logger.info(f'Music File Name:{file_name}')
+        logger.info(f'本地报时文件名:{file_name}')
         pi_mplayer(music=file_name)
         logger.info('Successfully Reported the Time.')
         return
     else:
+        logger.info(f'找不到本地报时文件{file_name}，请求百度')
         text_voice = text2speech(text, file_name=file_name)
         if text_voice[key_success]:
             file_name = text_voice[key_data]
@@ -28,7 +29,14 @@ def time_reporting():
             logger.info('Successfully Reported the Time.')
             return
         else:
-            logger.warning(f'Time Reporting Failed.{text_voice[key_message]}')
+            if not retry:
+                return
+            require_times += 1
+            logger.warning(f'报时失败第{require_times}次')
+            if require_times >= 5:
+                logger.warning(f'报时失败达到5次.{text_voice[key_message]}')
+                return
+            time_reporting(require_times=require_times, retry=retry)
         return
 
 

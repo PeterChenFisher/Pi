@@ -1,7 +1,6 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
 from logging import StreamHandler
-import os
 from config import *
 
 logger = None
@@ -10,13 +9,11 @@ third_logger = None
 
 
 def logger_generator(logger_name, when='midnight', log_path=None, logger=None):
-    # init
     base_logger_path = log_path if log_path else os.path.join(excluded_file, 'log', logger_name)
     if not os.path.exists(os.path.join(excluded_file, 'log')):
         os.mkdir(os.path.join(excluded_file, 'log'))
     if not os.path.exists(base_logger_path):
         os.mkdir(base_logger_path)
-    # create logger
     if not logger:
         logger = logging.getLogger(logger_name)
     formatter = logging.Formatter(
@@ -36,5 +33,5 @@ def logger_generator(logger_name, when='midnight', log_path=None, logger=None):
         logger.addHandler(timedRotatingFileHandler)
         logger.addHandler(streamHandler)
 
-        logger.info(f'Init Logger {logger.name}.')
+        logger.info(f'Init logger {logger.name}.')
     return logger

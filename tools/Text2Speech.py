@@ -23,8 +23,7 @@ def get_token():
               'client_secret': SecretKey}
     a = requests.get(url, params=params)
     auth = eval(a.text)
-    file_location = config.BaiduYunTokenFileLocation
-    with open(file_location, 'w+', encoding='utf-8') as fo:
+    with open(config.BaiduYunTokenFileLocation, 'w+', encoding='utf-8') as fo:
         json.dump(auth, fo, indent='  ', ensure_ascii=False)
 
     return template(success=True, data=auth)
@@ -57,7 +56,7 @@ def text2speech(text, file_location=config.tts_location, file_name=None):
     if not os.path.exists(file_location):
         os.mkdir(file_location)
     speech_url = 'http://tsn.baidu.com/text2audio'
-    logger.info('The Text Is:' + text)
+    logger.info(f'The Text Is:{text}')
     try:
         res = requests.post(url=speech_url, params={'tex': text, 'tok': tok, 'cuid': cuid, 'lan': lan, 'ctp': ctp,
                                                     'spd': spd, 'pit': pit, 'vol': vol, 'per': per, 'aue': aue})
