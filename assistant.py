@@ -24,7 +24,6 @@ def test_condition():
     # ServerChanWarn.server_chan_post(server_chan_url=Dingding.server_chan_url_test, title='测试！', content='测试server酱测试版')
     # Bibles.send_calvinism_speech()
     import pyttsx3
-    pyttsx3.spe
     return
 
 
