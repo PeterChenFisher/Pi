@@ -1,0 +1,1 @@
+main_url = 'https://mp.weixin.qq.com/s/TnlJe0vu3w9068VmXx3iFw'
