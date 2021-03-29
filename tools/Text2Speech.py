@@ -5,9 +5,11 @@ import config
 from tools import log
 from tools import DDingWarn
 from tools.reply_template import *
+import pyttsx3
 
 auth = None
 logger = log.logger
+pyttsx3_engine = pyttsx3.init()
 
 
 # 获取调用百度api的token，auth为返回的结果
